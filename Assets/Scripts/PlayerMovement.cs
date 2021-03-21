@@ -33,7 +33,9 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D Rigidbody;
 
     float moveInput;
-    bool jumpInput, jumping;
+    bool jumpInput;
+        
+    bool grounded, jumping;
 
     float earlyJumpPressTimer;
 
@@ -72,17 +74,20 @@ public class PlayerMovement : MonoBehaviour
 
     void platform ()
     {
-        Vector2 newVelocity = Rigidbody.velocity;
-        bool grounded = isGrounded();
+        grounded = isGrounded();
 
-        newVelocity.y -= Gravity * Time.deltaTime;
+        Rigidbody.velocity = handleMovement(handleJumping(Rigidbody.velocity));
+        Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
+    }
 
-        // JUMP STATE
+    Vector2 handleJumping (Vector2 currentVelocity)
+    {
+        float y = currentVelocity.y;
 
         if (grounded && !jumping && earlyJumpPressTimer > 0)
         {
             // start of jump
-            newVelocity.y = JumpSpeedBurst;
+            y = JumpSpeedBurst;
             jumping = true;
         }
         else if (grounded && jumping && Rigidbody.velocity.y <= 0)
@@ -93,18 +98,21 @@ public class PlayerMovement : MonoBehaviour
         else if (jumping && !jumpInput && Rigidbody.velocity.y > JumpSpeedCut)
         {
             // letting go of jump
-            newVelocity.y = JumpSpeedCut;
+            y = JumpSpeedCut;
         }
 
-        // HORIZONTAL STATE
+        return new Vector2(currentVelocity.x, y);
+    }
 
+    Vector2 handleMovement (Vector2 currentVelocity)
+    {
         var profile = grounded ? GroundProfile : AirProfile;
 
         if (moveInput == 0)
         {
             Vector2 deceleration = Mathf.Sign(Rigidbody.velocity.x) * Vector2.right * profile.Deceleration * Time.deltaTime;
             deceleration = Vector2.ClampMagnitude(deceleration, Mathf.Abs(Rigidbody.velocity.x));
-            newVelocity -= deceleration;
+            currentVelocity -= deceleration;
         }
         else
         {
@@ -116,13 +124,11 @@ public class PlayerMovement : MonoBehaviour
                 acceleration = Mathf.Max(profile.Acceleration, profile.Deceleration);
             }
 
-            newVelocity.x += moveInput * acceleration * Time.deltaTime;
-            newVelocity.x = Mathf.Clamp(newVelocity.x, -profile.MaxSpeed, profile.MaxSpeed);
+            currentVelocity.x += moveInput * acceleration * Time.deltaTime;
+            currentVelocity.x = Mathf.Clamp(currentVelocity.x, -profile.MaxSpeed, profile.MaxSpeed);
         }
 
-        // FINAL STATE
-
-        Rigidbody.velocity = newVelocity;
+        return currentVelocity;
     }
 
     // explicitly classify 0 as different from positive/negative, since mathf.sign classifies 0 as positive
