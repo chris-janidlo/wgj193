@@ -164,9 +164,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 89
     maxNormalAngle: 91
-  GlideCharges: 0
-  DashCharges: 0
   Rigidbody: {fileID: 1840587908484706153}
+  GlideCharges: {fileID: 11400000, guid: bd8f413c75da583458151de9401100d5, type: 2}
+  DashCharges: {fileID: 11400000, guid: f8cc42b054ae1644e888d37c100ce88f, type: 2}
 --- !u!50 &1840587908484706153
 Rigidbody2D:
   serializedVersion: 4

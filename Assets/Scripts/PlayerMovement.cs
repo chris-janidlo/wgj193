@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+using UnityAtoms.BaseAtoms;
 using crass;
 
 [RequireComponent(typeof(Collider2D))]
@@ -33,12 +34,10 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
     public ContactFilter2D GroundCheckFilter;
 
-    [Header("Ability Charges")]
-    public int GlideCharges;
-    public int DashCharges;
-
     [Header("References")]
     public Rigidbody2D Rigidbody;
+    public IntVariable GlideCharges;
+    public IntVariable DashCharges;
 
     Vector2 moveInput, moveInputMemory;
     bool jumpInput, dashInput;
@@ -109,10 +108,10 @@ public class PlayerMovement : MonoBehaviour
         Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
 
 
-        if (!gliding && GlideCharges > 0 && Rigidbody.velocity.y < -MinFallSpeedToStartGliding && jumpInput)
+        if (!gliding && GlideCharges.Value > 0 && Rigidbody.velocity.y < -MinFallSpeedToStartGliding && jumpInput)
         {
             gliding = true;
-            GlideCharges--;
+            GlideCharges.Value--;
         }
 
         if (gliding)
@@ -192,11 +191,11 @@ public class PlayerMovement : MonoBehaviour
 
     void dash ()
     {
-        if (dashInput && DashCharges > 0)
+        if (dashInput && DashCharges.Value > 0)
         {
             jumping = false;
             dashInput = false;
-            DashCharges--;
+            DashCharges.Value--;
 
             Vector2 direction = moveInput;
 
