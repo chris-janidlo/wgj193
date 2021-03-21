@@ -39,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
 
     float earlyJumpPressTimer;
 
+    void Update ()
+    {
+        earlyJumpPressTimer -= Time.deltaTime;
+    }
+
     void FixedUpdate ()
     {
         platform();
@@ -115,8 +120,6 @@ public class PlayerMovement : MonoBehaviour
         // FINAL STATE
 
         Rigidbody.velocity = newVelocity;
-
-        earlyJumpPressTimer -= Time.deltaTime;
     }
 
     // explicitly classify 0 as different from positive/negative, since mathf.sign classifies 0 as positive
