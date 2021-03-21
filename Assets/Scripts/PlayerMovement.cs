@@ -27,18 +27,21 @@ public class PlayerMovement : MonoBehaviour
     
     public float MinFallSpeedToStartGliding, MaxFallSpeedWhenGliding;
 
+    public float DashSpeed;
+
     public float HalfHeight;
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
     public ContactFilter2D GroundCheckFilter;
 
     [Header("Ability Charges")]
     public int GlideCharges;
+    public int DashCharges;
 
     [Header("References")]
     public Rigidbody2D Rigidbody;
 
-    float moveInput;
-    bool jumpInput;
+    Vector2 moveInput, moveInputMemory;
+    bool jumpInput, dashInput;
         
     bool grounded, gliding, jumping;
 
@@ -50,11 +53,12 @@ public class PlayerMovement : MonoBehaviour
     void Start ()
     {
         groundedHitList = new RaycastHit2D[1];
+        moveInputMemory = Vector2.right;
     }
 
     void Update ()
     {
-        earlyJumpPressTimer = Math.Max(earlyJumpPressTimer - Time.deltaTime, 0);
+        earlyJumpPressTimer = Mathf.Max(earlyJumpPressTimer - Time.deltaTime, 0);
     }
 
     void FixedUpdate ()
@@ -64,7 +68,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMoveInput (CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>().x;
+        moveInput = context.ReadValue<Vector2>();
+
+        if (moveInput != Vector2.zero) moveInputMemory = moveInput;
     }
 
     public void OnJumpInput (CallbackContext context)
@@ -77,11 +83,17 @@ public class PlayerMovement : MonoBehaviour
         jumpInput = context.ReadValueAsButton();
     }
 
+    public void OnDashInput (CallbackContext context)
+    {
+        dashInput = context.performed;
+    }
+
     void platform ()
     {
         grounded = isGrounded();
 
         fall();
+        dash(); // dash goes after fall so that fall doesn't cancel an upward, grounded dash. it goes before jump so it can turn off jumping as needed
         jump();
         move();
     }
@@ -143,13 +155,15 @@ public class PlayerMovement : MonoBehaviour
     void move ()
     {
         float x = Rigidbody.velocity.x;
+        float inputX = moveInput.x;
+
         BasicMovementProfile profile;
 
         if (gliding) profile = GlideProfile;
         else if (!grounded) profile = AirProfile;
         else profile = GroundProfile;
 
-        if (moveInput == 0)
+        if (inputX == 0)
         {
             Vector2 deceleration = Mathf.Sign(x) * Vector2.right * profile.Deceleration * Time.deltaTime;
             deceleration = Vector2.ClampMagnitude(deceleration, Mathf.Abs(x));
@@ -159,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float acceleration = profile.Acceleration;
 
-            if (x != 0 && ternarySign(moveInput) != ternarySign(x))
+            if (x != 0 && ternarySign(inputX) != ternarySign(x))
             {
                 // if we're switching directions, and the deceleration is faster, use the deceleration
                 acceleration = Mathf.Max(profile.Acceleration, profile.Deceleration);
@@ -167,13 +181,32 @@ public class PlayerMovement : MonoBehaviour
 
             x = Mathf.Clamp
             (
-                x + moveInput * acceleration * Time.deltaTime,
+                x + inputX * acceleration * Time.deltaTime,
                 -profile.MaxSpeed,
                 profile.MaxSpeed
             );
         }
 
         Rigidbody.velocity = new Vector2(x, Rigidbody.velocity.y);
+    }
+
+    void dash ()
+    {
+        if (dashInput && DashCharges > 0)
+        {
+            jumping = false;
+            dashInput = false;
+            DashCharges--;
+
+            Vector2 direction = moveInput;
+
+            if (moveInput == Vector2.zero)
+            {
+                direction.x = Mathf.Sign(moveInputMemory.x);
+            }
+
+            Rigidbody.velocity = direction.normalized * DashSpeed;
+        }
     }
 
     // explicitly classify 0 as different from positive/negative, since mathf.sign classifies 0 as positive

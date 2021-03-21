@@ -147,6 +147,7 @@ MonoBehaviour:
   EarlyJumpPressTime: 0.3
   MinFallSpeedToStartGliding: 12
   MaxFallSpeedWhenGliding: 2
+  DashSpeed: 16
   HalfHeight: 1
   GroundCheckBoxDimensions: {x: 1.5, y: 0.2}
   GroundCheckFilter:
@@ -164,6 +165,7 @@ MonoBehaviour:
     minNormalAngle: 89
     maxNormalAngle: 91
   GlideCharges: 0
+  DashCharges: 0
   Rigidbody: {fileID: 1840587908484706153}
 --- !u!50 &1840587908484706153
 Rigidbody2D:
@@ -243,7 +245,18 @@ MonoBehaviour:
     m_ActionId: 305a5419-3b7a-4548-bc62-d6ece0b8d0e2
     m_ActionName: Player/Jump[/Keyboard/space,/Keyboard/z]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1840587908484706152}
+        m_MethodName: OnDashInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6868eb25-87d5-40ee-a8d0-7aeaac39db59
     m_ActionName: Player/Dash[/Keyboard/leftShift,/Keyboard/x]
   - m_PersistentCalls:
