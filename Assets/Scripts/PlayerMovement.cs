@@ -27,17 +27,23 @@ public class PlayerMovement : MonoBehaviour
 
     public float HalfHeight;
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
-    public LayerMask GroundLayers;
+    public ContactFilter2D GroundCheckFilter;
 
     [Header("References")]
     public Rigidbody2D Rigidbody;
-
-    bool grounded => Physics2D.BoxCast(transform.position, GroundCheckBoxDimensions, 0, Vector2.down, HalfHeight, GroundLayers);
 
     float moveInput;
     bool jumpInput, jumping;
 
     float earlyJumpPressTimer;
+
+    // keep this at class-level to avoid making a new array every frame
+    RaycastHit2D[] groundedHitList;
+
+    void Start ()
+    {
+        groundedHitList = new RaycastHit2D[1];
+    }
 
     void Update ()
     {
@@ -71,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
     void platform ()
     {
         Vector2 newVelocity = Rigidbody.velocity;
+        bool grounded = isGrounded();
 
         newVelocity.y -= Gravity * Time.deltaTime;
 
@@ -128,5 +135,10 @@ public class PlayerMovement : MonoBehaviour
         if (x > 0) return 1;
         else if (x < 0) return -1;
         else return 0;
+    }
+
+    bool isGrounded ()
+    {
+        return Physics2D.BoxCast(transform.position, GroundCheckBoxDimensions, 0, Vector2.down, GroundCheckFilter, groundedHitList, HalfHeight) != 0;
     }
 }
