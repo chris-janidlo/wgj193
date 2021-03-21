@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using static UnityEngine.InputSystem.InputAction;
 using UnityAtoms.BaseAtoms;
 using crass;
@@ -30,18 +31,20 @@ public class PlayerMovement : MonoBehaviour
 
     public float DashSpeed;
 
+    public float SuperJumpBurst, SpeedToEndSuperJumpState;
+
     public float HalfHeight;
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
     public ContactFilter2D GroundCheckFilter;
 
     [Header("References")]
     public Rigidbody2D Rigidbody;
-    public IntVariable ExtraJumpCharges, GlideCharges, DashCharges;
+    public IntVariable ExtraJumpCharges, GlideCharges, DashCharges, SuperJumpCharges;
 
     Vector2 moveInput, moveInputMemory;
-    bool jumpInput, dashInput;
+    bool jumpInput, dashInput, superJumpInput;
         
-    bool grounded, gliding, jumping;
+    bool grounded, gliding, jumping, superJumping;
 
     float earlyJumpPressTimer;
 
@@ -83,7 +86,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDashInput (CallbackContext context)
     {
-        dashInput = context.performed;
+        if (context.interaction is HoldInteraction)
+        {
+            superJumpInput = context.performed;
+        }
+        else
+        {
+            // technically the action has successfully performed by here, but because it's a press it's already on to cancelled. since I manage the state of it later anyway, I'm just going to set it to true regardless here
+            dashInput = true;
+        }
     }
 
     void platform ()
@@ -92,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
         fall();
         dash(); // dash goes after fall so that fall doesn't cancel an upward, grounded dash. it goes before jump so it can turn off jumping as needed
+        superJump(); // super jump before jump since super jump overrides jump
         jump();
         move();
     }
@@ -128,6 +140,8 @@ public class PlayerMovement : MonoBehaviour
 
     void jump ()
     {
+        if (superJumping) return;
+
         float y = Rigidbody.velocity.y;
 
         if ((grounded || ExtraJumpCharges.Value > 0) && !jumping && earlyJumpPressTimer > 0)
@@ -208,6 +222,23 @@ public class PlayerMovement : MonoBehaviour
             }
 
             Rigidbody.velocity = direction.normalized * DashSpeed;
+        }
+    }
+
+    void superJump ()
+    {
+        if (grounded && superJumpInput && SuperJumpCharges.Value > 0)
+        {
+            superJumpInput = false;
+            superJumping = true;
+            SuperJumpCharges.Value--;
+
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, SuperJumpBurst);
+        }
+
+        if (superJumping && !grounded && Rigidbody.velocity.y <= SpeedToEndSuperJumpState)
+        {
+            superJumping = false;
         }
     }
 

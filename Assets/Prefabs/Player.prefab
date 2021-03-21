@@ -148,6 +148,8 @@ MonoBehaviour:
   MinFallSpeedToStartGliding: 12
   MaxFallSpeedWhenGliding: 2
   DashSpeed: 16
+  SuperJumpBurst: 48
+  SpeedToEndSuperJumpState: 12
   HalfHeight: 1
   GroundCheckBoxDimensions: {x: 1.5, y: 0.2}
   GroundCheckFilter:
@@ -168,6 +170,7 @@ MonoBehaviour:
   ExtraJumpCharges: {fileID: 11400000, guid: 687ff57c3c3214442821d2fbbf50f065, type: 2}
   GlideCharges: {fileID: 11400000, guid: bd8f413c75da583458151de9401100d5, type: 2}
   DashCharges: {fileID: 11400000, guid: f8cc42b054ae1644e888d37c100ce88f, type: 2}
+  SuperJumpCharges: {fileID: 11400000, guid: 35bc90a936f771e41a63deee2d3f6ff8, type: 2}
 --- !u!50 &1840587908484706153
 Rigidbody2D:
   serializedVersion: 4

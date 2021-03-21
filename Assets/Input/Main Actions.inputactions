@@ -22,20 +22,12 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Super Jump",
-                    "type": "Button",
-                    "id": "0281032f-2c32-41f3-99da-34f36ea4f642",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold"
-                },
-                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "6868eb25-87d5-40ee-a8d0-7aeaac39db59",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Hold,Press"
                 }
             ],
             "bindings": [
@@ -159,39 +151,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "5acc5124-8521-465f-971c-ae029748d5fb",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Super Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5ae0bb7f-6b7f-4a8c-8f0d-5bd4f0624f2f",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Super Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1f51fee7-3012-4034-8705-23c94ccbdd9e",
-                    "path": "<Keyboard>/z",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Super Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
