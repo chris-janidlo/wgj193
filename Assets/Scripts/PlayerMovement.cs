@@ -62,16 +62,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJumpInput (CallbackContext context)
     {
-        if (context.action.phase == InputActionPhase.Performed)
+        if (context.performed)
         {
-            jumpInput = true;
             earlyJumpPressTimer = EarlyJumpPressTime;
         }
 
-        if (context.action.phase == InputActionPhase.Canceled)
-        {
-            jumpInput = false;
-        }
+        jumpInput = context.ReadValueAsButton();
     }
 
     void platform ()
