@@ -141,6 +141,7 @@ MonoBehaviour:
   JumpSpeedBurst: 32
   JumpSpeedCut: 12
   EarlyJumpPressTime: 0.3
+  MaxFallSpeedWhenGliding: 2
   HalfHeight: 1
   GroundCheckBoxDimensions: {x: 1.5, y: 0.2}
   GroundCheckFilter:

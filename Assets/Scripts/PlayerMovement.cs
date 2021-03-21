@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     // cut: when you release the jump button, your vertical speed is set to this if it's currently higher. essentially an air control value
     public float JumpSpeedBurst, JumpSpeedCut;
     public float EarlyJumpPressTime; // you can input jump this many seconds before landing and it will still count
+    
+    public float MaxFallSpeedWhenGliding;
 
     public float HalfHeight;
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
@@ -76,16 +78,21 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = isGrounded();
 
-        if (grounded)
-        {
-            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
-        }
-        else
-        {
-            Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
-        }
+        Rigidbody.velocity = handleMovement(handleJumping(handleGravity(Rigidbody.velocity)));
+    }
 
-        Rigidbody.velocity = handleMovement(handleJumping(Rigidbody.velocity));
+    Vector2 handleGravity (Vector2 currentVelocity)
+    {
+        if (grounded) return new Vector2(Rigidbody.velocity.x, 0);
+
+        currentVelocity.y -= Gravity * Time.deltaTime;
+
+        if (currentVelocity.y < 0 && jumpInput)
+        {
+            currentVelocity.y = Mathf.Max(currentVelocity.y, -MaxFallSpeedWhenGliding);
+        }
+        
+        return currentVelocity;
     }
 
     Vector2 handleJumping (Vector2 currentVelocity)
