@@ -138,9 +138,14 @@ MonoBehaviour:
     MaxSpeed: 16
     Acceleration: 32
     Deceleration: 4
+  GlideProfile:
+    MaxSpeed: 8
+    Acceleration: 32
+    Deceleration: 32
   JumpSpeedBurst: 32
   JumpSpeedCut: 12
   EarlyJumpPressTime: 0.3
+  MinFallSpeedToStartGliding: 12
   MaxFallSpeedWhenGliding: 2
   HalfHeight: 1
   GroundCheckBoxDimensions: {x: 1.5, y: 0.2}
@@ -158,6 +163,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 89
     maxNormalAngle: 91
+  GlideCharges: 0
   Rigidbody: {fileID: 1840587908484706153}
 --- !u!50 &1840587908484706153
 Rigidbody2D:

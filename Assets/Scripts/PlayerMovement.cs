@@ -18,18 +18,21 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Stats")]
     public float Gravity;
-    public BasicMovementProfile GroundProfile, AirProfile;
+    public BasicMovementProfile GroundProfile, AirProfile, GlideProfile;
 
     // burst: initial instantaneous speed value when jumping
     // cut: when you release the jump button, your vertical speed is set to this if it's currently higher. essentially an air control value
     public float JumpSpeedBurst, JumpSpeedCut;
     public float EarlyJumpPressTime; // you can input jump this many seconds before landing and it will still count
     
-    public float MaxFallSpeedWhenGliding;
+    public float MinFallSpeedToStartGliding, MaxFallSpeedWhenGliding;
 
     public float HalfHeight;
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
     public ContactFilter2D GroundCheckFilter;
+
+    [Header("Ability Charges")]
+    public int GlideCharges;
 
     [Header("References")]
     public Rigidbody2D Rigidbody;
@@ -37,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     float moveInput;
     bool jumpInput;
         
-    bool grounded, jumping;
+    bool grounded, gliding, jumping;
 
     float earlyJumpPressTimer;
 
@@ -93,14 +96,24 @@ public class PlayerMovement : MonoBehaviour
 
         Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
 
-        if (Rigidbody.velocity.y < 0 && jumpInput)
+
+        if (!gliding && GlideCharges > 0 && Rigidbody.velocity.y < -MinFallSpeedToStartGliding && jumpInput)
+        {
+            gliding = true;
+            GlideCharges--;
+        }
+
+        if (gliding)
         {
             Rigidbody.velocity = new Vector2
             (
                 Rigidbody.velocity.x,
                 Mathf.Max(Rigidbody.velocity.y, -MaxFallSpeedWhenGliding)
             );
+
         }
+
+        if (!jumpInput || grounded) gliding = false;
     }
 
     void jump ()
@@ -130,7 +143,11 @@ public class PlayerMovement : MonoBehaviour
     void move ()
     {
         float x = Rigidbody.velocity.x;
-        var profile = grounded ? GroundProfile : AirProfile;
+        BasicMovementProfile profile;
+
+        if (gliding) profile = GlideProfile;
+        else if (!grounded) profile = AirProfile;
+        else profile = GroundProfile;
 
         if (moveInput == 0)
         {
