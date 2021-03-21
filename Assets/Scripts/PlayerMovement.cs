@@ -76,8 +76,16 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = isGrounded();
 
+        if (grounded)
+        {
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+        }
+        else
+        {
+            Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
+        }
+
         Rigidbody.velocity = handleMovement(handleJumping(Rigidbody.velocity));
-        Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
     }
 
     Vector2 handleJumping (Vector2 currentVelocity)
