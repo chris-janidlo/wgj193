@@ -78,26 +78,34 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = isGrounded();
 
-        Rigidbody.velocity = handleMovement(handleJumping(handleGravity(Rigidbody.velocity)));
+        fall();
+        jump();
+        move();
     }
 
-    Vector2 handleGravity (Vector2 currentVelocity)
+    void fall ()
     {
-        if (grounded) return new Vector2(Rigidbody.velocity.x, 0);
-
-        currentVelocity.y -= Gravity * Time.deltaTime;
-
-        if (currentVelocity.y < 0 && jumpInput)
+        if (grounded)
         {
-            currentVelocity.y = Mathf.Max(currentVelocity.y, -MaxFallSpeedWhenGliding);
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+            return;
         }
-        
-        return currentVelocity;
+
+        Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
+
+        if (Rigidbody.velocity.y < 0 && jumpInput)
+        {
+            Rigidbody.velocity = new Vector2
+            (
+                Rigidbody.velocity.x,
+                Mathf.Max(Rigidbody.velocity.y, -MaxFallSpeedWhenGliding)
+            );
+        }
     }
 
-    Vector2 handleJumping (Vector2 currentVelocity)
+    void jump ()
     {
-        float y = currentVelocity.y;
+        float y = Rigidbody.velocity.y;
 
         if (grounded && !jumping && earlyJumpPressTimer > 0)
         {
@@ -116,12 +124,12 @@ public class PlayerMovement : MonoBehaviour
             y = JumpSpeedCut;
         }
 
-        return new Vector2(currentVelocity.x, y);
+        Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, y);
     }
 
-    Vector2 handleMovement (Vector2 currentVelocity)
+    void move ()
     {
-        float x = currentVelocity.x;
+        float x = Rigidbody.velocity.x;
         var profile = grounded ? GroundProfile : AirProfile;
 
         if (moveInput == 0)
@@ -148,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
             );
         }
 
-        return new Vector2(x, currentVelocity.y);
+        Rigidbody.velocity = new Vector2(x, Rigidbody.velocity.y);
     }
 
     // explicitly classify 0 as different from positive/negative, since mathf.sign classifies 0 as positive
