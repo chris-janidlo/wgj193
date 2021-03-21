@@ -36,8 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     public Rigidbody2D Rigidbody;
-    public IntVariable GlideCharges;
-    public IntVariable DashCharges;
+    public IntVariable ExtraJumpCharges, GlideCharges, DashCharges;
 
     Vector2 moveInput, moveInputMemory;
     bool jumpInput, dashInput;
@@ -131,11 +130,14 @@ public class PlayerMovement : MonoBehaviour
     {
         float y = Rigidbody.velocity.y;
 
-        if (grounded && !jumping && earlyJumpPressTimer > 0)
+        if ((grounded || ExtraJumpCharges.Value > 0) && !jumping && earlyJumpPressTimer > 0)
         {
             // start of jump
             y = JumpSpeedBurst;
             jumping = true;
+            earlyJumpPressTimer = 0;
+
+            if (!grounded) ExtraJumpCharges.Value--;
         }
         else if (grounded && jumping && y <= 0)
         {
@@ -146,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // letting go of jump
             y = JumpSpeedCut;
+            jumping = false;
         }
 
         Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, y);

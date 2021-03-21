@@ -165,6 +165,7 @@ MonoBehaviour:
     minNormalAngle: 89
     maxNormalAngle: 91
   Rigidbody: {fileID: 1840587908484706153}
+  ExtraJumpCharges: {fileID: 11400000, guid: 687ff57c3c3214442821d2fbbf50f065, type: 2}
   GlideCharges: {fileID: 11400000, guid: bd8f413c75da583458151de9401100d5, type: 2}
   DashCharges: {fileID: 11400000, guid: f8cc42b054ae1644e888d37c100ce88f, type: 2}
 --- !u!50 &1840587908484706153
