@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update ()
     {
-        earlyJumpPressTimer -= Time.deltaTime;
+        earlyJumpPressTimer = Math.Max(earlyJumpPressTimer - Time.deltaTime, 0);
     }
 
     void FixedUpdate ()
@@ -90,12 +90,12 @@ public class PlayerMovement : MonoBehaviour
             y = JumpSpeedBurst;
             jumping = true;
         }
-        else if (grounded && jumping && Rigidbody.velocity.y <= 0)
+        else if (grounded && jumping && y <= 0)
         {
             // landing
             jumping = false;
         }
-        else if (jumping && !jumpInput && Rigidbody.velocity.y > JumpSpeedCut)
+        else if (jumping && !jumpInput && y > JumpSpeedCut)
         {
             // letting go of jump
             y = JumpSpeedCut;
@@ -106,29 +106,34 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 handleMovement (Vector2 currentVelocity)
     {
+        float x = currentVelocity.x;
         var profile = grounded ? GroundProfile : AirProfile;
 
         if (moveInput == 0)
         {
-            Vector2 deceleration = Mathf.Sign(Rigidbody.velocity.x) * Vector2.right * profile.Deceleration * Time.deltaTime;
-            deceleration = Vector2.ClampMagnitude(deceleration, Mathf.Abs(Rigidbody.velocity.x));
-            currentVelocity -= deceleration;
+            Vector2 deceleration = Mathf.Sign(x) * Vector2.right * profile.Deceleration * Time.deltaTime;
+            deceleration = Vector2.ClampMagnitude(deceleration, Mathf.Abs(x));
+            x -= deceleration.x;
         }
         else
         {
             float acceleration = profile.Acceleration;
 
-            if (Rigidbody.velocity.x != 0 && ternarySign(moveInput) != ternarySign(Rigidbody.velocity.x))
+            if (x != 0 && ternarySign(moveInput) != ternarySign(x))
             {
                 // if we're switching directions, and the deceleration is faster, use the deceleration
                 acceleration = Mathf.Max(profile.Acceleration, profile.Deceleration);
             }
 
-            currentVelocity.x += moveInput * acceleration * Time.deltaTime;
-            currentVelocity.x = Mathf.Clamp(currentVelocity.x, -profile.MaxSpeed, profile.MaxSpeed);
+            x = Mathf.Clamp
+            (
+                x + moveInput * acceleration * Time.deltaTime,
+                -profile.MaxSpeed,
+                profile.MaxSpeed
+            );
         }
 
-        return currentVelocity;
+        return new Vector2(x, currentVelocity.y);
     }
 
     // explicitly classify 0 as different from positive/negative, since mathf.sign classifies 0 as positive
