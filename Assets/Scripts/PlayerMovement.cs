@@ -47,7 +47,8 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer SpriteRenderer;
     public IntVariable ExtraJumpCharges, GlideCharges, DashCharges, SuperJumpCharges;
 
-    Vector2 moveInput, moveInputMemory;
+    Vector2 moveInput;
+    float horizontalMoveInputMemory;
     bool jumpInput, dashInput, superJumpInput;
         
     bool grounded, gliding, jumping, superJumping;
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     void Start ()
     {
         groundedHitList = new RaycastHit2D[1];
-        moveInputMemory = Vector2.right;
+        horizontalMoveInputMemory = 1;
     }
 
     void Update ()
@@ -79,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
 
-        if (moveInput != Vector2.zero) moveInputMemory = moveInput;
+        if (moveInput.x != 0) horizontalMoveInputMemory = moveInput.x;
     }
 
     public void OnJumpInput (CallbackContext context)
@@ -107,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
 
     void animate ()
     {
-        SpriteRenderer.flipX = moveInputMemory.x < 0;
+        SpriteRenderer.flipX = horizontalMoveInputMemory < 0;
 
         Animator.SetInteger(HorizontalIntName, (int) ternarySign(Rigidbody.velocity.x));
         Animator.SetInteger(VerticalIntName, (int) ternarySign(Rigidbody.velocity.y));
@@ -235,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (moveInput == Vector2.zero)
             {
-                direction.x = Mathf.Sign(moveInputMemory.x);
+                direction.x = Mathf.Sign(horizontalMoveInputMemory);
             }
 
             Rigidbody.velocity = direction.normalized * DashSpeed;
