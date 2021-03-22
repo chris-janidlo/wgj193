@@ -256,7 +256,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (grounded && superJumpInput && SuperJumpCharges.Value > 0)
         {
-            superJumpInput = false;
             superJumping = true;
             SuperJumpCharges.Value--;
 
@@ -267,6 +266,8 @@ public class PlayerMovement : MonoBehaviour
         {
             superJumping = false;
         }
+
+        superJumpInput = false;
     }
 
     // explicitly classify 0 as different from positive/negative, since mathf.sign classifies 0 as positive
