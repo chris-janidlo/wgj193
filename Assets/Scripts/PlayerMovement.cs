@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Animation")]
     public string HorizontalIntName;
-    public string VerticalIntName;
+    public string VerticalIntName, GroundedBoolName;
 
     [Header("References")]
     public Rigidbody2D Rigidbody;
@@ -110,10 +110,8 @@ public class PlayerMovement : MonoBehaviour
         SpriteRenderer.flipX = moveInputMemory.x < 0;
 
         Animator.SetInteger(HorizontalIntName, (int) ternarySign(Rigidbody.velocity.x));
-
-        var vert = grounded ? 0 : Math.Sign(Rigidbody.velocity.y);
-
-        Animator.SetInteger(VerticalIntName, vert);
+        Animator.SetInteger(VerticalIntName, (int) ternarySign(Rigidbody.velocity.y));
+        Animator.SetBool(GroundedBoolName, grounded);
     }
 
     void platform ()

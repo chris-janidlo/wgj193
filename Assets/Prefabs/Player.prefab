@@ -188,6 +188,7 @@ MonoBehaviour:
     maxNormalAngle: 91
   HorizontalIntName: Horizontal Direction
   VerticalIntName: Vertical Direction
+  GroundedBoolName: Grounded
   Rigidbody: {fileID: 1840587908484706153}
   Animator: {fileID: 7654657566251244259}
   SpriteRenderer: {fileID: 1840587907783083427}
