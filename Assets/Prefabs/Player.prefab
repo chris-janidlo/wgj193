@@ -151,24 +151,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Gravity: 64
   GroundProfile:
-    MaxSpeed: 16
-    Acceleration: 64
+    MaxSpeed: 12
+    Acceleration: 50
     Deceleration: 80
   AirProfile:
-    MaxSpeed: 16
+    MaxSpeed: 12
     Acceleration: 32
     Deceleration: 4
   GlideProfile:
     MaxSpeed: 8
     Acceleration: 32
     Deceleration: 32
-  JumpSpeedBurst: 32
-  JumpSpeedCut: 12
+  JumpSpeedBurst: 24
+  JumpSpeedCut: 10
   EarlyJumpPressTime: 0.3
   MinFallSpeedToStartGliding: 6
   MaxFallSpeedWhenGliding: 2
   DashSpeed: 16
-  SuperJumpBurst: 48
+  SuperJumpBurst: 36
   SpeedToEndSuperJumpState: 12
   HalfHeight: 1
   GroundCheckBoxDimensions: {x: 1.5, y: 0.2}

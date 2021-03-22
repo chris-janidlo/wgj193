@@ -185,11 +185,11 @@ public class PlayerMovement : MonoBehaviour
             // landing
             jumping = false;
         }
-        else if (jumping && !jumpInput && y > JumpSpeedCut)
+        else if (jumping && !jumpInput)
         {
             // letting go of jump
-            y = JumpSpeedCut;
-            jumping = false;
+            if (y > JumpSpeedCut) y = JumpSpeedCut; // jump height control
+            jumping = false; // so you can always extra jump after letting go
         }
 
         Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, y);
