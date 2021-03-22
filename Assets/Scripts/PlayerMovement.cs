@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 moveInput;
     float horizontalMoveInputMemory;
-    bool jumpInput, dashInput, superJumpInput;
+    bool jumpInput, glideInput, dashInput, superJumpInput;
         
     bool grounded, gliding, jumping, superJumping;
 
@@ -93,11 +93,18 @@ public class PlayerMovement : MonoBehaviour
         jumpInput = context.ReadValueAsButton();
     }
 
-    public void OnDashInput (CallbackContext context)
+    public void OnSpecialInput (CallbackContext context)
     {
         if (context.interaction is HoldInteraction)
         {
-            superJumpInput = context.performed;
+            if (grounded)
+            {
+                superJumpInput = context.performed;
+            }
+            else
+            {
+                glideInput = context.performed;
+            }
         }
         else
         {
@@ -137,9 +144,10 @@ public class PlayerMovement : MonoBehaviour
         Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
 
 
-        if (!gliding && GlideCharges.Value > 0 && Rigidbody.velocity.y < -MinFallSpeedToStartGliding && jumpInput)
+        if (!gliding && GlideCharges.Value > 0 && Rigidbody.velocity.y < -MinFallSpeedToStartGliding && glideInput)
         {
             gliding = true;
+            jumping = false; // so you can jump out of a glide
             GlideCharges.Value--;
         }
 
@@ -153,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (!jumpInput || grounded) gliding = false;
+        if (!glideInput || grounded) gliding = false;
     }
 
     void jump ()
@@ -167,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
             // start of jump
             y = JumpSpeedBurst;
             jumping = true;
+            gliding = false; // if you jump out of a glide
             earlyJumpPressTimer = 0;
 
             if (!grounded) ExtraJumpCharges.Value--;

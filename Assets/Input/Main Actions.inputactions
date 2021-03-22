@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Dash",
+                    "name": "Special",
                     "type": "Button",
                     "id": "6868eb25-87d5-40ee-a8d0-7aeaac39db59",
                     "expectedControlType": "Button",
@@ -192,7 +192,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Dash",
+                    "action": "Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -203,7 +203,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Dash",
+                    "action": "Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -214,7 +214,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Dash",
+                    "action": "Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

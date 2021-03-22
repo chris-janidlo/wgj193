@@ -165,7 +165,7 @@ MonoBehaviour:
   JumpSpeedBurst: 32
   JumpSpeedCut: 12
   EarlyJumpPressTime: 0.3
-  MinFallSpeedToStartGliding: 12
+  MinFallSpeedToStartGliding: 6
   MaxFallSpeedWhenGliding: 2
   DashSpeed: 16
   SuperJumpBurst: 48
@@ -276,7 +276,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1840587908484706152}
-        m_MethodName: OnDashInput
+        m_MethodName: OnSpecialInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
