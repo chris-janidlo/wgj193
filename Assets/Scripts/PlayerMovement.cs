@@ -142,9 +142,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics2D.BoxCast(transform.position, GroundCheckBoxDimensions, 0, Vector2.down, PlatformStickFilter, groundedHitList, HalfHeight) != 0)
         {
-            transform.parent = groundedHitList[0].transform;
+            if (transform.parent == null)
+            {
+                transform.parent = groundedHitList[0].transform;
+                groundedHitList[0].collider.GetComponent<Platform>().PlayerLandedHere.Invoke();
+            }
         }
-        else
+        else if (transform.parent != null)
         {
             transform.parent = null;
         }
