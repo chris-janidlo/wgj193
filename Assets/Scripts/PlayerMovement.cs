@@ -42,10 +42,11 @@ public class PlayerMovement : MonoBehaviour
     public string VerticalIntName, GroundedBoolName;
 
     [Header("References")]
-    public Rigidbody2D Rigidbody;
     public Animator Animator;
     public SpriteRenderer SpriteRenderer;
     public IntVariable ExtraJumpCharges, GlideCharges, DashCharges, SuperJumpCharges;
+
+    Vector2 velocity;
 
     Vector2 moveInput;
     float horizontalMoveInputMemory;
@@ -117,8 +118,8 @@ public class PlayerMovement : MonoBehaviour
     {
         SpriteRenderer.flipX = horizontalMoveInputMemory < 0;
 
-        Animator.SetInteger(HorizontalIntName, (int) ternarySign(Rigidbody.velocity.x));
-        Animator.SetInteger(VerticalIntName, (int) ternarySign(Rigidbody.velocity.y));
+        Animator.SetInteger(HorizontalIntName, (int) ternarySign(velocity.x));
+        Animator.SetInteger(VerticalIntName, (int) ternarySign(velocity.y));
         Animator.SetBool(GroundedBoolName, grounded);
     }
 
@@ -131,20 +132,22 @@ public class PlayerMovement : MonoBehaviour
         superJump(); // super jump before jump since super jump overrides jump
         jump();
         move();
+
+        transform.position += (Vector3) velocity * Time.deltaTime;
     }
 
     void fall ()
     {
         if (grounded)
         {
-            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+            velocity = new Vector2(velocity.x, 0);
             return;
         }
 
-        Rigidbody.velocity += Vector2.down * Gravity * Time.deltaTime;
+        velocity += Vector2.down * Gravity * Time.deltaTime;
 
 
-        if (!gliding && GlideCharges.Value > 0 && Rigidbody.velocity.y < -MinFallSpeedToStartGliding && glideInput)
+        if (!gliding && GlideCharges.Value > 0 && velocity.y < -MinFallSpeedToStartGliding && glideInput)
         {
             gliding = true;
             jumping = false; // so you can jump out of a glide
@@ -153,10 +156,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (gliding)
         {
-            Rigidbody.velocity = new Vector2
+            velocity = new Vector2
             (
-                Rigidbody.velocity.x,
-                Mathf.Max(Rigidbody.velocity.y, -MaxFallSpeedWhenGliding)
+                velocity.x,
+                Mathf.Max(velocity.y, -MaxFallSpeedWhenGliding)
             );
 
         }
@@ -168,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (superJumping) return;
 
-        float y = Rigidbody.velocity.y;
+        float y = velocity.y;
 
         if ((grounded || ExtraJumpCharges.Value > 0) && !jumping && earlyJumpPressTimer > 0)
         {
@@ -192,12 +195,12 @@ public class PlayerMovement : MonoBehaviour
             jumping = false; // so you can always extra jump after letting go
         }
 
-        Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, y);
+        velocity = new Vector2(velocity.x, y);
     }
 
     void move ()
     {
-        float x = Rigidbody.velocity.x;
+        float x = velocity.x;
         float inputX = moveInput.x;
 
         BasicMovementProfile profile;
@@ -230,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
             );
         }
 
-        Rigidbody.velocity = new Vector2(x, Rigidbody.velocity.y);
+        velocity = new Vector2(x, velocity.y);
     }
 
     void dash ()
@@ -248,7 +251,7 @@ public class PlayerMovement : MonoBehaviour
                 direction.x = Mathf.Sign(horizontalMoveInputMemory);
             }
 
-            Rigidbody.velocity = direction.normalized * DashSpeed;
+            velocity = direction.normalized * DashSpeed;
         }
     }
 
@@ -259,10 +262,10 @@ public class PlayerMovement : MonoBehaviour
             superJumping = true;
             SuperJumpCharges.Value--;
 
-            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, SuperJumpBurst);
+            velocity = new Vector2(velocity.x, SuperJumpBurst);
         }
 
-        if (superJumping && !grounded && Rigidbody.velocity.y <= SpeedToEndSuperJumpState)
+        if (superJumping && !grounded && velocity.y <= SpeedToEndSuperJumpState)
         {
             superJumping = false;
         }
