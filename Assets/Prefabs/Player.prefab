@@ -156,7 +156,7 @@ MonoBehaviour:
     Deceleration: 80
   AirProfile:
     MaxSpeed: 12
-    Acceleration: 32
+    Acceleration: 40
     Deceleration: 4
   GlideProfile:
     MaxSpeed: 8
