@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1840587907783083436}
   - component: {fileID: 1840587907783083427}
+  - component: {fileID: 7654657566251244259}
   m_Layer: 8
   m_Name: Visual
   m_TagString: Untagged
@@ -82,6 +83,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7654657566251244259
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840587907783083437}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a7128237aa8df6c44afbdf4e49e6246f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1840587908484706165
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +186,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 89
     maxNormalAngle: 91
+  HorizontalIntName: Horizontal Direction
+  VerticalIntName: Vertical Direction
   Rigidbody: {fileID: 1840587908484706153}
+  Animator: {fileID: 7654657566251244259}
+  SpriteRenderer: {fileID: 1840587907783083427}
   ExtraJumpCharges: {fileID: 11400000, guid: 687ff57c3c3214442821d2fbbf50f065, type: 2}
   GlideCharges: {fileID: 11400000, guid: bd8f413c75da583458151de9401100d5, type: 2}
   DashCharges: {fileID: 11400000, guid: f8cc42b054ae1644e888d37c100ce88f, type: 2}
@@ -303,10 +327,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d4789a3d-df3c-40d8-9245-4c097624d0d2
     m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0281032f-2c32-41f3-99da-34f36ea4f642
-    m_ActionName: Player/Super Jump[/Keyboard/leftShift,/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

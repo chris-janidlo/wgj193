@@ -37,8 +37,14 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
     public ContactFilter2D GroundCheckFilter;
 
+    [Header("Animation")]
+    public string HorizontalIntName;
+    public string VerticalIntName;
+
     [Header("References")]
     public Rigidbody2D Rigidbody;
+    public Animator Animator;
+    public SpriteRenderer SpriteRenderer;
     public IntVariable ExtraJumpCharges, GlideCharges, DashCharges, SuperJumpCharges;
 
     Vector2 moveInput, moveInputMemory;
@@ -60,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
     void Update ()
     {
         earlyJumpPressTimer = Mathf.Max(earlyJumpPressTimer - Time.deltaTime, 0);
+
+        animate();
     }
 
     void FixedUpdate ()
@@ -95,6 +103,17 @@ public class PlayerMovement : MonoBehaviour
             // technically the action has successfully performed by here, but because it's a press it's already on to cancelled. since I manage the state of it later anyway, I'm just going to set it to true regardless here
             dashInput = true;
         }
+    }
+
+    void animate ()
+    {
+        SpriteRenderer.flipX = moveInputMemory.x < 0;
+
+        Animator.SetInteger(HorizontalIntName, (int) ternarySign(Rigidbody.velocity.x));
+
+        var vert = grounded ? 0 : Math.Sign(Rigidbody.velocity.y);
+
+        Animator.SetInteger(VerticalIntName, vert);
     }
 
     void platform ()
