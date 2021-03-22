@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float HalfHeight;
     public Vector2 GroundCheckBoxDimensions; // should typically be set to x = player width plus walking over platform distance, y = vertical fudge
-    public ContactFilter2D GroundCheckFilter;
+    public ContactFilter2D GroundCheckFilter, PlatformStickFilter;
 
     [Header("Animation")]
     public string HorizontalIntName;
@@ -127,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = isGrounded();
 
+        stickToPlatforms();
+
         fall();
         dash(); // dash goes after fall so that fall doesn't cancel an upward, grounded dash. it goes before jump so it can turn off jumping as needed
         superJump(); // super jump before jump since super jump overrides jump
@@ -134,6 +136,18 @@ public class PlayerMovement : MonoBehaviour
         move();
 
         transform.position += (Vector3) velocity * Time.deltaTime;
+    }
+
+    void stickToPlatforms ()
+    {
+        if (Physics2D.BoxCast(transform.position, GroundCheckBoxDimensions, 0, Vector2.down, PlatformStickFilter, groundedHitList, HalfHeight) != 0)
+        {
+            transform.parent = groundedHitList[0].transform;
+        }
+        else
+        {
+            transform.parent = null;
+        }
     }
 
     void fall ()
