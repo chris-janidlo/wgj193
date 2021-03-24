@@ -39,8 +39,6 @@ public class CardBuildZone : MonoBehaviour
     {
         if (!HasCard) return;
 
-        currentlyInstantiatedPlatformingBits.ColliderState = newPhase == Phase.Platforming;
-
         if (newPhase != Phase.Build) return;
 
         if (Floor > PlayerFloor.Value)

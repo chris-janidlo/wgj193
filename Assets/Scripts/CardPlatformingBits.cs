@@ -4,10 +4,32 @@ using UnityEngine;
 
 public class CardPlatformingBits : MonoBehaviour
 {
-    public bool ColliderState
+    [SerializeField]
+    bool _alwaysDisableColliders;
+    public bool AlwaysDisableColliders
     {
-        set => Colliders.ForEach(c => c.enabled = value);
+        get => _alwaysDisableColliders;
+        set
+        {
+            _alwaysDisableColliders = value;
+            if (!value) setColliderState(false);
+        }
     }
 
     public List<Collider2D> Colliders;
+
+    void Start ()
+    {
+        setColliderState(false);
+    }
+
+    public void OnCurrentPhaseChanged (Phase newPhase)
+    {
+        setColliderState(!AlwaysDisableColliders && newPhase == Phase.Platforming);
+    }
+
+    void setColliderState (bool value)
+    {
+        Colliders.ForEach(c => c.enabled = value);
+    }
 }

@@ -79,7 +79,8 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         this.handParent = handParent;
         lockedBuildZone = initialBuildZone;
 
-        Instantiate(card.PlatformingBits, PlatformingBitsParent).ColliderState = false;
+        var platformingBits = Instantiate(card.PlatformingBits, PlatformingBitsParent);
+        platformingBits.AlwaysDisableColliders = true;
         AbilityText.text = card.Ability.ToString();
     }
 
