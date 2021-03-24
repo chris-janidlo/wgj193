@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityAtoms.BaseAtoms;
 
 public class PlayerLifeCycleManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerLifeCycleManager : MonoBehaviour
     public string DeathAnimationTriggerName;
 
     public List<Behaviour> ComponentsToDisableWhenSpawningOrDespawning;
+    public VoidEvent PlayerDied;
 
     void Start ()
     {
@@ -24,6 +26,7 @@ public class PlayerLifeCycleManager : MonoBehaviour
     void disappearAnimationEvent_destroy ()
     {
         Destroy(gameObject);
+        PlayerDied.Raise();
     }
 
     void appearAnimationEvent_enable ()

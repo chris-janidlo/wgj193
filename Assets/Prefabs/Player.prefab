@@ -148,6 +148,7 @@ MonoBehaviour:
   - {fileID: 1553929854677723837}
   - {fileID: 1840587908484706155}
   - {fileID: 1840587908484706164}
+  PlayerDied: {fileID: 11400000, guid: f6e8ad1fa2ed6754986f19bd2e9eb63f, type: 2}
 --- !u!114 &1840587908484706155
 MonoBehaviour:
   m_ObjectHideFlags: 0
