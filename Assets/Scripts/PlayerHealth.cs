@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public LayerMask EnemyLayers;
 
     public IntVariable CurrentPlayerHealth;
+    public PlayerLifeCycleManager PlayerLifeCycleManager;
 
     void Start ()
     {
@@ -24,8 +25,7 @@ public class PlayerHealth : MonoBehaviour
             
             if (CurrentPlayerHealth.Value <= 0)
             {
-                // TODO: animate
-                Destroy(gameObject);
+                PlayerLifeCycleManager.Die();
             }
         }
     }
