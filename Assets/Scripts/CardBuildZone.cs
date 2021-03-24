@@ -95,5 +95,6 @@ public class CardBuildZone : MonoBehaviour
 
         Destroy(currentlyInstantiatedPlatformingBits.gameObject);
         currentlyInstantiatedPlatformingBits = null;
+        CurrentCard = null;
     }
 }
