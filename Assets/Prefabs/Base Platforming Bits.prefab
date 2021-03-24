@@ -100,7 +100,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 579345515
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b848fa83eb347ce4fa7c8196f51aeb0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -136,8 +136,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5930915857313413874}
   - component: {fileID: 5119078163540402154}
-  - component: {fileID: 6336388321470106045}
   - component: {fileID: 2828711407236965216}
+  - component: {fileID: 6336388321470106045}
+  - component: {fileID: 659137271509442315}
   m_Layer: 11
   m_Name: Base Platforming Bits
   m_TagString: Untagged
@@ -175,6 +176,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysDisableColliders: 0
   Colliders: []
+--- !u!114 &2828711407236965216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119184663184338865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5119078163540402154}
+        m_MethodName: OnCurrentPhaseChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}
 --- !u!331 &6336388321470106045
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -217,46 +253,22 @@ SpriteMask:
   m_Sprite: {fileID: -8246103488371625927, guid: f5566a94a8488db408871d2bbc731184,
     type: 3}
   m_MaskAlphaCutoff: 0.2
-  m_FrontSortingLayerID: 579345515
+  m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 579345515
-  m_FrontSortingLayer: -1
+  m_FrontSortingLayer: 0
   m_BackSortingLayer: -1
   m_FrontSortingOrder: 1
   m_BackSortingOrder: -1
-  m_IsCustomRangeActive: 1
+  m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
---- !u!114 &2828711407236965216
-MonoBehaviour:
+--- !u!210 &659137271509442315
+SortingGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5119184663184338865}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _developerDescription: 
-  _unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5119078163540402154}
-        m_MethodName: OnCurrentPhaseChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _actionResponses: []
-  _replayEventBufferOnRegister: 1
-  _eventReference:
-    _usage: 0
-    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
-    _eventInstancer: {fileID: 0}
-    _variable: {fileID: 0}
-    _variableInstancer: {fileID: 0}
+  m_SortingLayerID: 579345515
+  m_SortingLayer: -1
+  m_SortingOrder: 1

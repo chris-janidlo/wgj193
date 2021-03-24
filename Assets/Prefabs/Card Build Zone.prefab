@@ -41,8 +41,9 @@ GameObject:
   - component: {fileID: 5930915857313413874}
   - component: {fileID: 7674552047305542823}
   - component: {fileID: 6003018517775044313}
-  - component: {fileID: 6336388321470106045}
   - component: {fileID: 6238117119451606388}
+  - component: {fileID: 6336388321470106045}
+  - component: {fileID: 2517438832644299146}
   m_Layer: 12
   m_Name: Card Build Zone
   m_TagString: Untagged
@@ -123,6 +124,32 @@ MonoBehaviour:
     _eventInstancer: {fileID: 0}
     _variable: {fileID: 0}
     _variableInstancer: {fileID: 0}
+--- !u!61 &6238117119451606388
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119184663184338865}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.625, y: 3.75}
+  m_EdgeRadius: 0
 --- !u!331 &6336388321470106045
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -171,34 +198,19 @@ SpriteMask:
   m_BackSortingLayer: -1
   m_FrontSortingOrder: 1
   m_BackSortingOrder: -1
-  m_IsCustomRangeActive: 1
+  m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
---- !u!61 &6238117119451606388
-BoxCollider2D:
+--- !u!210 &2517438832644299146
+SortingGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5119184663184338865}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.625, y: 3.75}
-  m_EdgeRadius: 0
+  m_SortingLayerID: 579345515
+  m_SortingLayer: -1
+  m_SortingOrder: 0
 --- !u!1 &7568846250633617754
 GameObject:
   m_ObjectHideFlags: 0
