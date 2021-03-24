@@ -20,15 +20,15 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     bool interactible = true;
 
     Card card;
-    Transform handParent;
+    Transform handParent, dragParent;
     CardBuildZone lockedBuildZone;
 
-    RaycastHit2D[] buildZoneCheckResults;
+    Collider2D[] buildZoneCheckResults;
     Vector2 dragOffset;
 
     void Start ()
     {
-        buildZoneCheckResults = new RaycastHit2D[1];
+        buildZoneCheckResults = new Collider2D[1];
 
         ReturnToHandTransition.AttachMonoBehaviour(this);
         ScaleTransition.AttachMonoBehaviour(this);
@@ -46,7 +46,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         if (!interactible) return;
 
         dragOffset = (Vector2) transform.position - pointerWorldPosition(eventData);
-        transform.SetParent(transform.parent.parent, true);
+        transform.SetParent(dragParent, true);
     }
 
     public void OnDrag (PointerEventData eventData)
@@ -59,9 +59,9 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     {
         if (!interactible) return;
 
-        if (Physics2D.Raycast(pointerWorldPosition(eventData), Vector3.forward, BuildZoneCheckFilter, buildZoneCheckResults) != 0)
+        if (Physics2D.OverlapPoint(pointerWorldPosition(eventData), BuildZoneCheckFilter, buildZoneCheckResults) != 0)
         {
-            var buildZone = buildZoneCheckResults[0].collider.GetComponent<CardBuildZone>();
+            var buildZone = buildZoneCheckResults[0].GetComponent<CardBuildZone>();
 
             if (!buildZone.HasCard)
             {
@@ -70,7 +70,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             }
         }
 
-        sendBackToHand();
+        StartCoroutine(sendBackToHand());
     }
 
     public void Initialize (Card card, Transform handParent, CardBuildZone initialBuildZone)
@@ -78,6 +78,8 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         this.card = card;
         this.handParent = handParent;
         lockedBuildZone = initialBuildZone;
+
+        dragParent = handParent.parent;
 
         var platformingBits = Instantiate(card.PlatformingBits, PlatformingBitsParent);
         platformingBits.AlwaysDisableColliders = true;
@@ -107,6 +109,8 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     void lockToBuildZone (CardBuildZone buildZone)
     {
+        if (lockedBuildZone != null) lockedBuildZone.UnsetCard();
+
         lockedBuildZone = buildZone;
         lockedBuildZone.SetCard(card);
 
@@ -123,7 +127,12 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             lockedBuildZone = null;
         }
 
-        ReturnToHandTransition.FlashFromTo(transform.position, handParent.position);
+        Vector2 origPos = transform.position;
+        transform.SetParent(handParent, false);
+        yield return null;
+        Vector2 targetPos = transform.position;
+
+        ReturnToHandTransition.FlashFromTo(origPos, targetPos);
 
         while (ReturnToHandTransition.Transitioning)
         {
@@ -131,7 +140,6 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             yield return null;
         }
 
-        transform.SetParent(handParent.transform, false);
         interactible = true;
     }
 
