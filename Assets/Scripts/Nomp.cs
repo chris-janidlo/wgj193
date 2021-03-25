@@ -12,15 +12,19 @@ public class Nomp : MonoBehaviour
     public TransitionableVector2 MoveTransition;
 
     public Vector2 MoveCheckBoxDimensions;
-    public LayerMask MoveCheckLayerMask;
+    public ContactFilter2D MoveCheckFilter;
     [Tooltip("0 is Up, 1 is Right, 2 is Down, 3 is Left")]
     public List<SpriteRenderer> Indicators;
 
     int plannedDir;
     List<Vector2> dirVecs = new List<Vector2> { Vector2.up, Vector2.right, Vector2.down, Vector2.left };
 
+    RaycastHit2D[] moveCheckResults;
+
     void Start ()
     {
+        moveCheckResults = new RaycastHit2D[1];
+
         MoveTransition.AttachMonoBehaviour(this);
         MoveTransition.Value = transform.position;
     }
@@ -30,7 +34,21 @@ public class Nomp : MonoBehaviour
         transform.position = MoveTransition.Value;
     }
 
-    public void ChooseDirection ()
+    public void OnCurrentPhaseChanged (Phase newPhase)
+    {
+        switch (newPhase)
+        {
+            case Phase.Build:
+                chooseDirection();
+                break;
+
+            case Phase.Enemy:
+                move();
+                break;
+        }
+    }
+
+    void chooseDirection ()
     {
         List<int> dirInts = new List<int> { 0, 1, 2, 3 };
         dirInts.Remove(plannedDir);
@@ -40,7 +58,7 @@ public class Nomp : MonoBehaviour
 
         foreach (int dir in dirInts)
         {
-            if (!Physics2D.BoxCast(transform.position, MoveCheckBoxDimensions, 0, dirVecs[dir], MoveDistance, MoveCheckLayerMask))
+            if (Physics2D.BoxCast(transform.position, MoveCheckBoxDimensions, 0, dirVecs[dir], MoveCheckFilter, moveCheckResults, MoveDistance) == 0)
             {
                 Indicators[dir].enabled = true;
                 plannedDir = dir;
@@ -49,7 +67,7 @@ public class Nomp : MonoBehaviour
         }
     }
 
-    public void Move ()
+    void move ()
     {
         if (plannedDir == -1) return;
 

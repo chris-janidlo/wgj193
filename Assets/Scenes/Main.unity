@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 681947815}
   - component: {fileID: 681947816}
   - component: {fileID: 681947817}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Zero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 1037039182}
   - component: {fileID: 1037039183}
   - component: {fileID: 1037039184}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: One
   m_TagString: Untagged
   m_Icon: {fileID: 0}
