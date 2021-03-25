@@ -18,5 +18,5 @@ MonoBehaviour:
   Changed: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
   ChangedWithHistory: {fileID: 0}
   _oldValue: 0
-  _initialValue: 0
+  _initialValue: 1
   _preChangeTransformers: []

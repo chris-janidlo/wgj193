@@ -12,7 +12,7 @@ public class PhaseText : MonoBehaviour
 
     public TextMeshProUGUI TextContainer;
 
-    void Start ()
+    void Awake ()
     {
         TextFadeTransition.AttachMonoBehaviour(this);
     }
