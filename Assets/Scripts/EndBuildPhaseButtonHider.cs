@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using crass;
 
 public class EndBuildPhaseButtonHider : MonoBehaviour
 {
     public TransitionableFloat FadeTransition;
+    public Button Button;
     public CanvasGroup CanvasGroup;
 
     void Start ()
@@ -19,6 +21,8 @@ public class EndBuildPhaseButtonHider : MonoBehaviour
 
     public void OnCurrentPhaseChanged (Phase newPhase)
     {
-        FadeTransition.StartTransitionTo(newPhase == Phase.Build ? 1 : 0);
+        bool buildPhase = newPhase == Phase.Build;
+        Button.interactable = buildPhase;
+        FadeTransition.StartTransitionTo(buildPhase ? 1 : 0);
     }
 }

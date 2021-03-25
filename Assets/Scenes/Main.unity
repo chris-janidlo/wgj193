@@ -386,6 +386,7 @@ MonoBehaviour:
     value: 0
     Time: 0.3
     Ease: 8
+  Button: {fileID: 1271543314}
   CanvasGroup: {fileID: 674660656}
 --- !u!114 &674660655
 MonoBehaviour:
