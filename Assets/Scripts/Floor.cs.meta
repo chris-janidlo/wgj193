@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f713916d20feab046a1350b713f452d7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - SpawnPoint: {instanceID: 0}
+  - CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601,
+      type: 2}
+  - GameLifeCycleManager: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
