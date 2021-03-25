@@ -848,6 +848,11 @@ PrefabInstance:
       propertyPath: HandLayoutGroup
       value: 
       objectReference: {fileID: 1665703793}
+    - target: {fileID: 7674552047305542823, guid: 9ae2565fd98eb76448472d02bc29321d,
+        type: 3}
+      propertyPath: Floor
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ae2565fd98eb76448472d02bc29321d, type: 3}
 --- !u!4 &897798128 stripped
@@ -1040,6 +1045,11 @@ PrefabInstance:
       propertyPath: HandLayoutGroup
       value: 
       objectReference: {fileID: 1665703793}
+    - target: {fileID: 7674552047305542823, guid: 9ae2565fd98eb76448472d02bc29321d,
+        type: 3}
+      propertyPath: Floor
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ae2565fd98eb76448472d02bc29321d, type: 3}
 --- !u!4 &960054028 stripped
