@@ -103,7 +103,16 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         dragParent = handParent.parent;
 
         transform.SetParent(dragParent, true);
-        DummyLayoutElement.SetParent(handParent, false);
+
+        if (initialBuildZone != null)
+        {
+            DummyLayoutElement.SetParent(dragParent, true);
+            DummyLayoutElement.position = initialBuildZone.transform.position;
+        }
+        else
+        {
+            DummyLayoutElement.SetParent(handParent, false);
+        }
 
         ScaleTransition.FlashFromTo(0, 1);
     }
@@ -155,13 +164,19 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         ScaleTransition.FlashFromTo(1, 0);
         yield return new WaitWhile(() => ScaleTransition.Transitioning);
 
-        Destroy(gameObject);
+        destroyCard();
         lockedBuildZone.Build();
     }
 
     IEnumerator sendCardToPlatformingUI ()
     {
-        Destroy(gameObject);
+        destroyCard();
         yield return null;
+    }
+
+    void destroyCard ()
+    {
+        Destroy(gameObject);
+        Destroy(DummyLayoutElement.gameObject);
     }
 }

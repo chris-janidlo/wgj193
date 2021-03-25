@@ -45,9 +45,11 @@ public class CardBuildZone : MonoBehaviour
         {
             // game manager should retrieve the card from this and put it in the discard pile
             StartCoroutine(discardAnimation());
+            CurrentCard = null;
         }
         else if (Floor == PlayerFloor.Value)
         {
+            StartCoroutine(discardAnimation());
             Instantiate(UICardPrefab).Initialize(CurrentCard, HandLayoutGroup.transform, this);
         }
         else
@@ -95,6 +97,5 @@ public class CardBuildZone : MonoBehaviour
 
         Destroy(currentlyInstantiatedPlatformingBits.gameObject);
         currentlyInstantiatedPlatformingBits = null;
-        CurrentCard = null;
     }
 }
