@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1756449555378800986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 6035946195009004833}
   m_RootOrder: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScrollSpeed: 1
-  ScrollSize: 2
+  ScrollSize: 6
 --- !u!1 &4077137564864990447
 GameObject:
   m_ObjectHideFlags: 0

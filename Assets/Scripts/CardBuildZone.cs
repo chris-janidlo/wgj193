@@ -84,12 +84,12 @@ public class CardBuildZone : MonoBehaviour
         }
 
         currentlyInstantiatedPlatformingBits = Instantiate(CurrentCard.PlatformingBits, PlatformingBitsParent);
-        PlatformingBitsSizeTransition.FlashFromTo(0, 1);
+        PlatformingBitsSizeTransition.StartTransitionTo(1f / 3f);
     }
 
     IEnumerator discardAnimation ()
     {
-        PlatformingBitsSizeTransition.FlashFromTo(1, 0);
+        PlatformingBitsSizeTransition.StartTransitionTo(0);
 
         yield return new WaitWhile(() => PlatformingBitsSizeTransition.Transitioning);
 
