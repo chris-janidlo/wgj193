@@ -161,6 +161,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     IEnumerator sendCardToPlatformingUI ()
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
+        yield return null;
     }
 }
