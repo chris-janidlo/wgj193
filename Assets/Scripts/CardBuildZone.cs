@@ -48,7 +48,7 @@ public class CardBuildZone : MonoBehaviour
         }
         else if (Floor == PlayerFloor.Value)
         {
-            Instantiate(UICardPrefab, HandLayoutGroup.transform.parent).Initialize(CurrentCard, HandLayoutGroup.transform, this);
+            Instantiate(UICardPrefab).Initialize(CurrentCard, HandLayoutGroup.transform, this);
         }
         else
         {
