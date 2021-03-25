@@ -66,13 +66,14 @@ MonoBehaviour:
   JumpSpeedBurst: 24
   JumpSpeedCut: 10
   EarlyJumpPressTime: 0.3
+  NonGroundedJumpGracePeriod: 0.1
   MinFallSpeedToStartGliding: 6
   MaxFallSpeedWhenGliding: 2
   DashSpeed: 16
   SuperJumpBurst: 36
   SpeedToEndSuperJumpState: 12
   HalfHeight: 1
-  GroundCheckBoxDimensions: {x: 1.5, y: 0.2}
+  GroundCheckBoxDimensions: {x: 1, y: 0.2}
   GroundCheckFilter:
     useTriggers: 0
     useLayerMask: 1

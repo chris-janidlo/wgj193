@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     // cut: when you release the jump button, your vertical speed is set to this if it's currently higher. essentially an air control value
     public float JumpSpeedBurst, JumpSpeedCut;
     public float EarlyJumpPressTime; // you can input jump this many seconds before landing and it will still count
+    public float NonGroundedJumpGracePeriod; // same as above, but in seconds after falling off a ledge
     
     public float MinFallSpeedToStartGliding, MaxFallSpeedWhenGliding;
 
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer SpriteRenderer;
     public IntVariable ExtraJumpCharges, GlideCharges, DashCharges, SuperJumpCharges;
 
+    bool groundedRecentlyEnoughToJump => nonGroundedGracePeriodTimer < NonGroundedJumpGracePeriod;
+
     Vector2 velocity;
 
     Vector2 moveInput;
@@ -54,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         
     bool grounded, gliding, jumping, superJumping;
 
-    float earlyJumpPressTimer;
+    float earlyJumpPressTimer, nonGroundedGracePeriodTimer;
 
     // keep this at class-level to avoid making a new array every frame
     RaycastHit2D[] groundedHitList;
@@ -68,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     void Update ()
     {
         earlyJumpPressTimer = Mathf.Max(earlyJumpPressTimer - Time.deltaTime, 0);
+        nonGroundedGracePeriodTimer = Mathf.Min(nonGroundedGracePeriodTimer + Time.deltaTime, NonGroundedJumpGracePeriod);
 
         animate();
     }
@@ -126,6 +130,8 @@ public class PlayerMovement : MonoBehaviour
     void platform ()
     {
         grounded = isGrounded();
+
+        if (grounded) nonGroundedGracePeriodTimer = 0;
 
         stickToPlatforms();
 
@@ -191,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
 
         float y = velocity.y;
 
-        if ((grounded || ExtraJumpCharges.Value > 0) && !jumping && earlyJumpPressTimer > 0)
+        if ((groundedRecentlyEnoughToJump || ExtraJumpCharges.Value > 0) && !jumping && earlyJumpPressTimer > 0)
         {
             // start of jump
             y = JumpSpeedBurst;
@@ -275,7 +281,7 @@ public class PlayerMovement : MonoBehaviour
 
     void superJump ()
     {
-        if (grounded && superJumpInput && SuperJumpCharges.Value > 0)
+        if (groundedRecentlyEnoughToJump && superJumpInput && SuperJumpCharges.Value > 0)
         {
             superJumping = true;
             SuperJumpCharges.Value--;
@@ -283,7 +289,7 @@ public class PlayerMovement : MonoBehaviour
             velocity = new Vector2(velocity.x, SuperJumpBurst);
         }
 
-        if (superJumping && !grounded && velocity.y <= SpeedToEndSuperJumpState)
+        if (superJumping && !groundedRecentlyEnoughToJump && velocity.y <= SpeedToEndSuperJumpState)
         {
             superJumping = false;
         }
