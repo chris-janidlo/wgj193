@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3636339823757412236}
   - component: {fileID: 5943324189413159115}
   - component: {fileID: 8248625771192270347}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Block (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5432816755641474250}
   - component: {fileID: 6369153488093509092}
   - component: {fileID: 5455877425767027884}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Block (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 8564287530458292528}
   - component: {fileID: 2780958711947830118}
   - component: {fileID: 5000035962000659466}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Block (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 4288878150110363569}
   - component: {fileID: 4890566440707779450}
   - component: {fileID: 3097721263119158602}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Block (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 1784794989729298752}
   - component: {fileID: 7779577179918386652}
   - component: {fileID: 1824807630235849356}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Block (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 8563451568022790152}
   - component: {fileID: 352244516517872533}
   - component: {fileID: 6620278549430676901}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,6 +655,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4162038588928263596, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5119078163540402154, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
         type: 3}
       propertyPath: Colliders.Array.size
@@ -694,6 +699,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: test
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119184663184338865, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5930915857313413874, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
         type: 3}
