@@ -132,6 +132,8 @@ GameObject:
   - component: {fileID: 282840814}
   - component: {fileID: 282840813}
   - component: {fileID: 282840811}
+  - component: {fileID: 282840812}
+  - component: {fileID: 282840815}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -147,6 +149,32 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282840810}
   m_Enabled: 1
+--- !u!114 &282840812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a8d6b88ebd94847948fc4ff3562fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SmoothFollowTime: 0.3
+  FollowSize: 10
+  BuildPhaseSize: 15
+  ZoomTransition:
+    value: 10
+    Time: 0.7
+    Ease: 7
+  Camera: {fileID: 282840813}
+  Floors:
+  - {fileID: 681947816}
+  - {fileID: 1037039183}
+  CurrentPlayerPosition: {fileID: 11400000, guid: b739a5a9d895de8489018bebbc4b0165,
+    type: 2}
+  CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -174,7 +202,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -205,6 +233,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &282840815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 282840812}
+        m_MethodName: OnPhaseChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}
 --- !u!1 &500253964
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +529,7 @@ Transform:
   m_Children:
   - {fileID: 500253965}
   - {fileID: 881817588}
+  - {fileID: 963620494}
   m_Father: {fileID: 1189942789}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -487,6 +551,7 @@ MonoBehaviour:
   - {fileID: 506092857}
   - {fileID: 1139314011}
   SpawnPoint: {fileID: 881817588}
+  CameraCenterPoint: {fileID: 963620494}
   CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
   GameLifeCycleManager: {fileID: 823539689}
 --- !u!61 &681947817
@@ -502,7 +567,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06923294, y: 3.4154835}
+  m_Offset: {x: -0.06923294, y: 2.95463}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -513,7 +578,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 31.416302, y: 26.10841}
+  m_Size: {x: 31.416302, y: 27.842125}
   m_EdgeRadius: 0
 --- !u!1 &791440640
 GameObject:
@@ -1070,6 +1135,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7ed1ae0ce26ca43baa13e2243ac413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &963620493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963620494}
+  m_Layer: 0
+  m_Name: Camera Focus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &963620494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963620493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 681947815}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1037039181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,6 +1196,7 @@ Transform:
   m_Children:
   - {fileID: 1600357583}
   - {fileID: 1070861480}
+  - {fileID: 2034873510}
   m_Father: {fileID: 1189942789}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1121,6 +1217,7 @@ MonoBehaviour:
   - {fileID: 897798129}
   - {fileID: 960054029}
   SpawnPoint: {fileID: 1070861480}
+  CameraCenterPoint: {fileID: 2034873510}
   CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
   GameLifeCycleManager: {fileID: 823539689}
 --- !u!61 &1037039184
@@ -1136,7 +1233,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3766575, y: -0.116244316}
+  m_Offset: {x: 0.3766575, y: -0.36859894}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1147,7 +1244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 29.774189, y: 18.180613}
+  m_Size: {x: 29.774189, y: 18.685322}
   m_EdgeRadius: 0
 --- !u!1 &1070861479
 GameObject:
@@ -6649,3 +6746,33 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1 &2034873509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2034873510}
+  m_Layer: 0
+  m_Name: Camera Focus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2034873510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034873509}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1037039182}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

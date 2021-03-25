@@ -111,6 +111,8 @@ MonoBehaviour:
   GlideCharges: {fileID: 11400000, guid: bd8f413c75da583458151de9401100d5, type: 2}
   DashCharges: {fileID: 11400000, guid: f8cc42b054ae1644e888d37c100ce88f, type: 2}
   SuperJumpCharges: {fileID: 11400000, guid: 35bc90a936f771e41a63deee2d3f6ff8, type: 2}
+  CurrentPlayerPosition: {fileID: 11400000, guid: b739a5a9d895de8489018bebbc4b0165,
+    type: 2}
 --- !u!114 &1553929854677723837
 MonoBehaviour:
   m_ObjectHideFlags: 0

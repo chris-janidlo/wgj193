@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator Animator;
     public SpriteRenderer SpriteRenderer;
     public IntVariable ExtraJumpCharges, GlideCharges, DashCharges, SuperJumpCharges;
+    public Vector3Variable CurrentPlayerPosition;
 
     bool groundedRecentlyEnoughToJump => nonGroundedGracePeriodTimer < NonGroundedJumpGracePeriod;
 
@@ -142,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
         move();
 
         transform.position += (Vector3) velocity * Time.deltaTime;
+        CurrentPlayerPosition.Value = transform.position;
     }
 
     void stickToPlatforms ()

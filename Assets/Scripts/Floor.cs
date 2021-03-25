@@ -7,7 +7,7 @@ public class Floor : MonoBehaviour
 {
     public int FloorNumber;
     public List<CardBuildZone> BuildZones;
-    public Transform SpawnPoint;
+    public Transform SpawnPoint, CameraCenterPoint;
 
     public IntVariable CurrentPlayerFloor;
     public GameLifeCycleManager GameLifeCycleManager;
