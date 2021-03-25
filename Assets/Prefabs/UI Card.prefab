@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &387113281620931012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8768206959634320361}
+  m_Layer: 5
+  m_Name: Dummy Layout Element
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8768206959634320361
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387113281620931012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7546596901113604403}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 7.875, y: 11.25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4064851119440883058
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,6 +105,7 @@ RectTransform:
   - {fileID: 1892972446026598260}
   - {fileID: 2440908824024482985}
   - {fileID: 5208473956287123186}
+  - {fileID: 8768206959634320361}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,9 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1d6b3b6242f1b43b6f20d6ef525c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReturnToHandTransition:
+  DummyFollowTransition:
     value: {x: 0, y: 0}
-    Time: 0.5
+    Time: 0.3
     Ease: 8
   ScaleTransition:
     value: 0
@@ -114,6 +150,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   AbilityText: {fileID: 7358496572209781763}
   PlatformingBitsParent: {fileID: 5208473956287123186}
+  DummyLayoutElement: {fileID: 8768206959634320361}
 --- !u!114 &7395704556712754393
 MonoBehaviour:
   m_ObjectHideFlags: 0

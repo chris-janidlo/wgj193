@@ -9,14 +9,15 @@ using crass;
 
 public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public TransitionableVector2 ReturnToHandTransition;
+    public TransitionableVector2 DummyFollowTransition;
     public TransitionableFloat ScaleTransition;
 
     public ContactFilter2D BuildZoneCheckFilter;
 
     public TextMeshProUGUI AbilityText;
-    public Transform PlatformingBitsParent;
+    public Transform PlatformingBitsParent, DummyLayoutElement;
 
+    bool dragging;
     bool interactible = true;
 
     Card card;
@@ -26,38 +27,54 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     Collider2D[] buildZoneCheckResults;
     Vector2 dragOffset;
 
-    void Start ()
+    void Awake ()
     {
         buildZoneCheckResults = new Collider2D[1];
 
-        ReturnToHandTransition.AttachMonoBehaviour(this);
+        DummyFollowTransition.AttachMonoBehaviour(this);
         ScaleTransition.AttachMonoBehaviour(this);
 
-        ScaleTransition.FlashFromTo(0, 1);
+        ScaleTransition.Value = 0;
     }
 
     void Update ()
     {
         transform.localScale = Vector3.one * Mathf.Max(ScaleTransition.Value, 0);
+
+        if (dragging || transform.position == DummyLayoutElement.position)
+        {
+            DummyFollowTransition.Value = DummyLayoutElement.position;
+        }
+        else
+        {
+            DummyFollowTransition.StartTransitionToIfNotAlreadyStarted(DummyLayoutElement.position);
+        }
+
+        transform.position = DummyFollowTransition.Value;
     }
 
     public void OnBeginDrag (PointerEventData eventData)
     {
-        if (!interactible) return;
+        if (!interactible || DummyFollowTransition.Transitioning) return;
 
-        dragOffset = (Vector2) transform.position - pointerWorldPosition(eventData);
-        transform.SetParent(dragParent, true);
+        dragging = true;
+
+        dragOffset = (Vector2) DummyLayoutElement.position - pointerWorldPosition(eventData);
+        DummyLayoutElement.SetParent(dragParent, true);
     }
 
     public void OnDrag (PointerEventData eventData)
     {
-        if (!interactible) return;
-        transform.position = dragOffset + pointerWorldPosition(eventData);
+        if (!interactible || DummyFollowTransition.Transitioning) return;
+
+        DummyLayoutElement.position = dragOffset + pointerWorldPosition(eventData);
     }
 
     public void OnEndDrag (PointerEventData eventData)
     {
-        if (!interactible) return;
+        if (!interactible || DummyFollowTransition.Transitioning) return;
+
+        dragging = false;
 
         if (Physics2D.OverlapPoint(pointerWorldPosition(eventData), BuildZoneCheckFilter, buildZoneCheckResults) != 0)
         {
@@ -70,7 +87,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             }
         }
 
-        StartCoroutine(sendBackToHand());
+        sendBackToHand();
     }
 
     public void Initialize (Card card, Transform handParent, CardBuildZone initialBuildZone)
@@ -79,11 +96,16 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         this.handParent = handParent;
         lockedBuildZone = initialBuildZone;
 
-        dragParent = handParent.parent;
-
         var platformingBits = Instantiate(card.PlatformingBits, PlatformingBitsParent);
         platformingBits.AlwaysDisableColliders = true;
         AbilityText.text = card.Ability.ToString();
+
+        dragParent = handParent.parent;
+
+        transform.SetParent(dragParent, true);
+        DummyLayoutElement.SetParent(handParent, false);
+
+        ScaleTransition.FlashFromTo(0, 1);
     }
 
     public void OnCurrentPhaseChanged (Phase newPhase)
@@ -114,33 +136,18 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         lockedBuildZone = buildZone;
         lockedBuildZone.SetCard(card);
 
-        transform.position = buildZone.transform.position;
+        DummyLayoutElement.position = buildZone.transform.position;
     }
 
-    IEnumerator sendBackToHand ()
+    void sendBackToHand ()
     {
-        interactible = false;
-
         if (lockedBuildZone != null)
         {
             lockedBuildZone.UnsetCard();
             lockedBuildZone = null;
         }
 
-        Vector2 origPos = transform.position;
-        transform.SetParent(handParent, false);
-        yield return null;
-        Vector2 targetPos = transform.position;
-
-        ReturnToHandTransition.FlashFromTo(origPos, targetPos);
-
-        while (ReturnToHandTransition.Transitioning)
-        {
-            transform.position = ReturnToHandTransition.Value;
-            yield return null;
-        }
-
-        interactible = true;
+        DummyLayoutElement.SetParent(handParent, false);
     }
 
     IEnumerator buildCard ()
