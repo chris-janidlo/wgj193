@@ -79,6 +79,22 @@ public class PlayerAbilityCharges : ScriptableObject
         }
     }
 
+    public void Initialize ()
+    {
+        _dash = 0;
+        _glide = 0;
+        _extraJump = 0;
+        _superJump = 0;
+    }
+
+    public void Clear ()
+    {
+        Dash = 0;
+        Glide = 0;
+        ExtraJump = 0;
+        SuperJump = 0;
+    }
+
     void changeAbilityCharges (ref int charges, int newValue, Ability ability)
     {
         int zeroedValue = Math.Max(newValue, 0);

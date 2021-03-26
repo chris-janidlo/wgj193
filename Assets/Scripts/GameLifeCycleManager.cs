@@ -21,6 +21,8 @@ public class GameLifeCycleManager : MonoBehaviour
     public FloorList FloorList;
     public IntVariable CurrentPlayerFloorNumber;
 
+    public PlayerAbilityCharges PlayerAbilityCharges;
+
     public LayoutGroup HandUILayoutGroup;
 
     public PlayerLifeCycleManager PlayerPrefab;
@@ -31,6 +33,8 @@ public class GameLifeCycleManager : MonoBehaviour
 
     void Start ()
     {
+        PlayerAbilityCharges.Initialize();
+
         DrawPile.Clear();
         DiscardPile.Clear();
 
@@ -83,6 +87,8 @@ public class GameLifeCycleManager : MonoBehaviour
             var uiCard = Instantiate(UICardPrefab);
             uiCard.Initialize(card, HandUILayoutGroup.transform, null);
         }
+
+        PlayerAbilityCharges.Clear();
     }
 
     IEnumerator enemyToPlatformingPhaseRoutine ()

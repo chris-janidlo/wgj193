@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityAtoms.BaseAtoms;
+using TMPro;
 using crass;
 
 public class PlatformingAbilityMeter : MonoBehaviour
 {
     public Ability Ability;
     public float RepeatedChangeDelay;
+
+    public TextMeshProUGUI Label;
+    public TransitionableFloat AlphaTransition;
 
     public LayoutGroup LayoutGroup;
     public PlatformingAbilityChargeVisual ChargeVisualPrefab;
@@ -23,17 +27,33 @@ public class PlatformingAbilityMeter : MonoBehaviour
     {
         PlayerAbilityCharges.NumberOfAbilityChargesDidChange += onAbilityChargesChanged;
         instantiatedChargeVisuals = new List<PlatformingAbilityChargeVisual>();
+
+        AlphaTransition.AttachMonoBehaviour(this);
     }
 
     void Update ()
     {
         WorldPosition.Value = CameraCache.Main.ScreenToWorldPoint(transform.position);
+        Label.alpha = AlphaTransition.Value;
     }
 
     void OnDestroy ()
     {
         // don't expect this to be destroyed, but just to be safe
         PlayerAbilityCharges.NumberOfAbilityChargesDidChange -= onAbilityChargesChanged;
+    }
+
+    public void OnPhaseChanged (Phase newPhase)
+    {
+        switch (newPhase)
+        {
+            case Phase.Build:
+                AlphaTransition.FlashFromTo(1, 0);
+                break;
+            case Phase.Enemy:
+                AlphaTransition.FlashFromTo(0, 1);
+                break;
+        }
     }
 
     void onAbilityChargesChanged (Ability ability, int oldValue, int newValue)

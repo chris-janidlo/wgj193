@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 77404450}
   - component: {fileID: 77404451}
+  - component: {fileID: 77404452}
   m_Layer: 5
   m_Name: Super Jump
   m_TagString: Untagged
@@ -173,12 +174,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ability: 3
   RepeatedChangeDelay: 0.1
+  Label: {fileID: 1648189638}
+  AlphaTransition:
+    value: 0
+    Time: 0.3
+    Ease: 10
   LayoutGroup: {fileID: 1833273474}
   ChargeVisualPrefab: {fileID: 8735889954540846685, guid: e41159335d1bca940b20ca723e067efb,
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
   WorldPosition: {fileID: 11400000, guid: 488e8a2985f43bb4e9efa73f996ddf99, type: 2}
+--- !u!114 &77404452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77404449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 77404451}
+        m_MethodName: OnPhaseChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 485711881}
   - component: {fileID: 485711882}
+  - component: {fileID: 485711883}
   m_Layer: 5
   m_Name: Glide
   m_TagString: Untagged
@@ -509,12 +551,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ability: 2
   RepeatedChangeDelay: 0.1
+  Label: {fileID: 360597230}
+  AlphaTransition:
+    value: 0
+    Time: 0.3
+    Ease: 10
   LayoutGroup: {fileID: 1354179651}
   ChargeVisualPrefab: {fileID: 8735889954540846685, guid: e41159335d1bca940b20ca723e067efb,
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
   WorldPosition: {fileID: 11400000, guid: 08e3dd48a9bf7c54980103a77ee16376, type: 2}
+--- !u!114 &485711883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485711880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 485711882}
+        m_MethodName: OnPhaseChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}
 --- !u!4 &500253965 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1724689929790618603, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67,
@@ -531,6 +613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 553428657}
   - component: {fileID: 553428658}
+  - component: {fileID: 553428659}
   m_Layer: 5
   m_Name: Dash
   m_TagString: Untagged
@@ -573,12 +656,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ability: 1
   RepeatedChangeDelay: 0.1
+  Label: {fileID: 1126908002}
+  AlphaTransition:
+    value: 0
+    Time: 0.3
+    Ease: 10
   LayoutGroup: {fileID: 1631950039}
   ChargeVisualPrefab: {fileID: 8735889954540846685, guid: e41159335d1bca940b20ca723e067efb,
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
   WorldPosition: {fileID: 11400000, guid: cf89c0b27a05b7f488b17dd918bf5990, type: 2}
+--- !u!114 &553428659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553428656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 553428658}
+        m_MethodName: OnPhaseChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}
 --- !u!1 &674660652
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +1091,8 @@ MonoBehaviour:
   TimeToStayInEnemyPhase: 2
   FloorList: {fileID: 11400000, guid: b3e86ffb520ff8c469f3a6855f031964, type: 2}
   CurrentPlayerFloorNumber: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601,
+    type: 2}
+  PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
   HandUILayoutGroup: {fileID: 1665703793}
   PlayerPrefab: {fileID: 3799004142929013861, guid: b329eb2187f9ff34e9ca2e189e6b8906,
@@ -1887,6 +2012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1250879669}
   - component: {fileID: 1250879670}
+  - component: {fileID: 1250879671}
   m_Layer: 5
   m_Name: Extra Jump
   m_TagString: Untagged
@@ -1929,12 +2055,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ability: 0
   RepeatedChangeDelay: 0.1
+  Label: {fileID: 1688464378}
+  AlphaTransition:
+    value: 0
+    Time: 0.3
+    Ease: 10
   LayoutGroup: {fileID: 2120559465}
   ChargeVisualPrefab: {fileID: 8735889954540846685, guid: e41159335d1bca940b20ca723e067efb,
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
   WorldPosition: {fileID: 11400000, guid: 780b8f3a4b369d642b5b392203cdb506, type: 2}
+--- !u!114 &1250879671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250879668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1250879670}
+        m_MethodName: OnPhaseChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}
 --- !u!1 &1271543312
 GameObject:
   m_ObjectHideFlags: 0
