@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     public Animator Animator;
     public SpriteRenderer SpriteRenderer;
-    public IntVariable ExtraJumpCharges, GlideCharges, DashCharges, SuperJumpCharges;
+    public PlayerAbilityCharges PlayerAbilityCharges;
     public Vector3Variable CurrentPlayerPosition;
 
     bool groundedRecentlyEnoughToJump => nonGroundedGracePeriodTimer < NonGroundedJumpGracePeriod;
@@ -173,11 +173,11 @@ public class PlayerMovement : MonoBehaviour
         velocity += Vector2.down * Gravity * Time.deltaTime;
 
 
-        if (!gliding && GlideCharges.Value > 0 && velocity.y < -MinFallSpeedToStartGliding && glideInput)
+        if (!gliding && PlayerAbilityCharges.Glide > 0 && velocity.y < -MinFallSpeedToStartGliding && glideInput)
         {
             gliding = true;
             jumping = false; // so you can jump out of a glide
-            GlideCharges.Value--;
+            PlayerAbilityCharges.Glide--;
         }
 
         if (gliding)
@@ -199,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
 
         float y = velocity.y;
 
-        if ((groundedRecentlyEnoughToJump || ExtraJumpCharges.Value > 0) && !jumping && earlyJumpPressTimer > 0)
+        if ((groundedRecentlyEnoughToJump || PlayerAbilityCharges.ExtraJump > 0) && !jumping && earlyJumpPressTimer > 0)
         {
             // start of jump
             y = JumpSpeedBurst;
@@ -207,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
             gliding = false; // if you jump out of a glide
             earlyJumpPressTimer = 0;
 
-            if (!grounded) ExtraJumpCharges.Value--;
+            if (!grounded) PlayerAbilityCharges.ExtraJump--;
         }
         else if (grounded && jumping && y <= 0)
         {
@@ -264,11 +264,11 @@ public class PlayerMovement : MonoBehaviour
 
     void dash ()
     {
-        if (dashInput && DashCharges.Value > 0)
+        if (dashInput && PlayerAbilityCharges.Dash > 0)
         {
             jumping = false;
             dashInput = false;
-            DashCharges.Value--;
+            PlayerAbilityCharges.Dash--;
 
             Vector2 direction = moveInput;
 
@@ -283,10 +283,10 @@ public class PlayerMovement : MonoBehaviour
 
     void superJump ()
     {
-        if (groundedRecentlyEnoughToJump && superJumpInput && SuperJumpCharges.Value > 0)
+        if (groundedRecentlyEnoughToJump && superJumpInput && PlayerAbilityCharges.SuperJump > 0)
         {
             superJumping = true;
-            SuperJumpCharges.Value--;
+            PlayerAbilityCharges.SuperJump--;
 
             velocity = new Vector2(velocity.x, SuperJumpBurst);
         }

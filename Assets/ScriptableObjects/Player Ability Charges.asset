@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf8a67b68db3d4650908f8cf6adeda60, type: 3}
-  m_Name: Glide Charges
+  m_Script: {fileID: 11500000, guid: 7999613640e30bb4eb248df7e006353d, type: 3}
+  m_Name: Player Ability Charges
   m_EditorClassIdentifier: 
-  _developerDescription: 
-  _id: 
-  _value: 0
-  Changed: {fileID: 0}
-  ChangedWithHistory: {fileID: 0}
-  _oldValue: 0
-  _initialValue: 0
-  _preChangeTransformers: []
+  _dash: 0
+  _glide: 0
+  _superJump: 0
+  _extraJump: 0
