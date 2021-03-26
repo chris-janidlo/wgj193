@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityAtoms;
+using UnityAtoms.BaseAtoms;
 using TMPro;
 using crass;
 
@@ -16,6 +16,13 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public TextMeshProUGUI AbilityText;
     public Transform PlatformingBitsParent, DummyLayoutElement;
+
+    public PlayerAbilityCharges PlayerAbilityCharges;
+    public Vector3Variable DashMeterLocation, GlideMeterLocation, ExtraJumpMeterLocation, SuperJumpMeterLocation;
+
+    public TransitionableFloat ToPlatformingUITransition;
+    [Range(0, 1)]
+    public float ToPlatformingUITargetScale;
 
     bool dragging;
     bool interactible = true;
@@ -33,6 +40,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
         DummyFollowTransition.AttachMonoBehaviour(this);
         ScaleTransition.AttachMonoBehaviour(this);
+        ToPlatformingUITransition.AttachMonoBehaviour(this);
 
         ScaleTransition.Value = 0;
     }
@@ -170,8 +178,44 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     IEnumerator sendCardToPlatformingUI ()
     {
+        Vector3 originalPosition = transform.position;
+        float originalScale = transform.localScale.x;
+
+        Vector3Variable targetPosition = null;
+
+        switch (card.Ability)
+        {
+            case Ability.Dash:
+                targetPosition = DashMeterLocation;
+                break;
+
+            case Ability.Glide:
+                targetPosition = GlideMeterLocation;
+                break;
+
+            case Ability.ExtraJump:
+                targetPosition = ExtraJumpMeterLocation;
+                break;
+
+            case Ability.SuperJump:
+                targetPosition = SuperJumpMeterLocation;
+                break;
+        }
+
+        ToPlatformingUITransition.FlashFromTo(0, 1);
+
+        while (ToPlatformingUITransition.Transitioning)
+        {
+            float t = ToPlatformingUITransition.Value;
+
+            transform.position = Vector3.Lerp(originalPosition, targetPosition.Value, t);
+            transform.localScale = Vector3.one * Mathf.Lerp(originalScale, ToPlatformingUITargetScale, t);
+            
+            yield return null;
+        }
+
+        PlayerAbilityCharges[card.Ability]++;
         destroyCard();
-        yield return null;
     }
 
     void destroyCard ()

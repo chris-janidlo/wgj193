@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityAtoms.BaseAtoms;
+using crass;
 
 public class PlatformingAbilityMeter : MonoBehaviour
 {
@@ -11,7 +13,9 @@ public class PlatformingAbilityMeter : MonoBehaviour
 
     public LayoutGroup LayoutGroup;
     public PlatformingAbilityChargeVisual ChargeVisualPrefab;
+
     public PlayerAbilityCharges PlayerAbilityCharges;
+    public Vector3Variable WorldPosition;
 
     List<PlatformingAbilityChargeVisual> instantiatedChargeVisuals;
 
@@ -19,6 +23,11 @@ public class PlatformingAbilityMeter : MonoBehaviour
     {
         PlayerAbilityCharges.NumberOfAbilityChargesDidChange += onAbilityChargesChanged;
         instantiatedChargeVisuals = new List<PlatformingAbilityChargeVisual>();
+    }
+
+    void Update ()
+    {
+        WorldPosition.Value = CameraCache.Main.ScreenToWorldPoint(transform.position);
     }
 
     void OnDestroy ()

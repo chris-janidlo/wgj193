@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.4, y: 0.5}
 --- !u!114 &77404451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
+  WorldPosition: {fileID: 11400000, guid: 488e8a2985f43bb4e9efa73f996ddf99, type: 2}
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +494,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.4, y: 0.5}
 --- !u!114 &485711882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +514,7 @@ MonoBehaviour:
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
+  WorldPosition: {fileID: 11400000, guid: 08e3dd48a9bf7c54980103a77ee16376, type: 2}
 --- !u!4 &500253965 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1724689929790618603, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67,
@@ -556,7 +558,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.4, y: 0.5}
 --- !u!114 &553428658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +578,7 @@ MonoBehaviour:
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
+  WorldPosition: {fileID: 11400000, guid: cf89c0b27a05b7f488b17dd918bf5990, type: 2}
 --- !u!1 &674660652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,7 +1914,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.4, y: 0.5}
 --- !u!114 &1250879670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1931,6 +1934,7 @@ MonoBehaviour:
     type: 3}
   PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
     type: 2}
+  WorldPosition: {fileID: 11400000, guid: 780b8f3a4b369d642b5b392203cdb506, type: 2}
 --- !u!1 &1271543312
 GameObject:
   m_ObjectHideFlags: 0

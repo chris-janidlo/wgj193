@@ -151,6 +151,20 @@ MonoBehaviour:
   AbilityText: {fileID: 7358496572209781763}
   PlatformingBitsParent: {fileID: 5208473956287123186}
   DummyLayoutElement: {fileID: 8768206959634320361}
+  PlayerAbilityCharges: {fileID: 11400000, guid: 17a1353e5bf61ba4bbe534a5f434f7ae,
+    type: 2}
+  DashMeterLocation: {fileID: 11400000, guid: cf89c0b27a05b7f488b17dd918bf5990, type: 2}
+  GlideMeterLocation: {fileID: 11400000, guid: 08e3dd48a9bf7c54980103a77ee16376, type: 2}
+  ExtraJumpMeterLocation: {fileID: 11400000, guid: 780b8f3a4b369d642b5b392203cdb506,
+    type: 2}
+  SuperJumpMeterLocation: {fileID: 11400000, guid: 488e8a2985f43bb4e9efa73f996ddf99,
+    type: 2}
+  ToPlatformingUITransition:
+    value: 0
+    Time: 0.4
+    Ease: 7
+  ToPlatformingUITargetScale: 0.1
+  ToPlatformingUIAbilityChargeUpdatePoint: 0.99
 --- !u!114 &7395704556712754393
 MonoBehaviour:
   m_ObjectHideFlags: 0
