@@ -46,7 +46,7 @@ public class PlatformingAbilityMeter : MonoBehaviour
             }
             else
             {
-                int popIndex = 0; // remove the rightmost card in the UI
+                int popIndex = 0;
                 instantiatedChargeVisuals[popIndex].Despawn();
                 instantiatedChargeVisuals.RemoveAt(popIndex);
             }
