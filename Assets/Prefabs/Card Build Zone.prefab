@@ -176,14 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7ed1ae0ce26ca43baa13e2243ac413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Floor: 0
   PlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
   PlatformingBitsSizeTransition:
     value: 0
     Time: 0.4
     Ease: 27
   PlatformingBitsParent: {fileID: 6035946195009004833}
-  HandLayoutGroup: {fileID: 0}
   UICardPrefab: {fileID: 8182838596638640312, guid: ed9130840c82ded498ea1d05216c7c89,
     type: 3}
 --- !u!114 &6003018517775044313

@@ -12,15 +12,15 @@ public class CardBuildZone : MonoBehaviour
 
     public Card CurrentCard { get; private set; }
 
-    [Tooltip("The floor this build zone is in")]
-    public int Floor;
     public IntVariable PlayerFloor;
 
     public TransitionableFloat PlatformingBitsSizeTransition;
 
     public Transform PlatformingBitsParent;
-    public LayoutGroup HandLayoutGroup;
     public UICard UICardPrefab;
+
+    int floorNumber;
+    LayoutGroup handLayoutGroup;
 
     CardPlatformingBits currentlyInstantiatedPlatformingBits;
 
@@ -41,21 +41,27 @@ public class CardBuildZone : MonoBehaviour
 
         if (newPhase != Phase.Build) return;
 
-        if (Floor > PlayerFloor.Value)
+        if (floorNumber > PlayerFloor.Value)
         {
             // game manager should retrieve the card from this and put it in the discard pile
             StartCoroutine(discardAnimation());
             CurrentCard = null;
         }
-        else if (Floor == PlayerFloor.Value)
+        else if (floorNumber == PlayerFloor.Value)
         {
             StartCoroutine(discardAnimation());
-            Instantiate(UICardPrefab).Initialize(CurrentCard, HandLayoutGroup.transform, this);
+            Instantiate(UICardPrefab).Initialize(CurrentCard, handLayoutGroup.transform, this);
         }
         else
         {
             // do nothing - this is a card on a floor that's below the player. the player isn't allowed to interact with it, so no new UICard, and they don't get these cards back either, so no death animation
         }
+    }
+
+    public void Initialize (int floorNumber, LayoutGroup handLayoutGroup)
+    {
+        this.floorNumber = floorNumber;
+        this.handLayoutGroup = handLayoutGroup;
     }
 
     public void SetCard (Card card)

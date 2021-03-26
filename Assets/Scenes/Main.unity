@@ -169,12 +169,9 @@ MonoBehaviour:
     Time: 0.7
     Ease: 7
   Camera: {fileID: 282840813}
-  Floors:
-  - {fileID: 681947816}
-  - {fileID: 1288576488}
+  FloorList: {fileID: 11400000, guid: b3e86ffb520ff8c469f3a6855f031964, type: 2}
   CurrentPlayerPosition: {fileID: 11400000, guid: b739a5a9d895de8489018bebbc4b0165,
     type: 2}
-  CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -385,18 +382,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1724689929592487654}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &681947816 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1724689928931511374, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67,
-    type: 3}
-  m_PrefabInstance: {fileID: 1724689929592487654}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f713916d20feab046a1350b713f452d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &764312797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -673,9 +658,7 @@ MonoBehaviour:
   DiscardPile: {fileID: 11400000, guid: c2921e914bcb56b449b040e1f4684f84, type: 2}
   CurrentPhase: {fileID: 11400000, guid: b797f2ae171283349865da6f4b038411, type: 2}
   TimeToStayInEnemyPhase: 2
-  Floors:
-  - {fileID: 681947816}
-  - {fileID: 1288576488}
+  FloorList: {fileID: 11400000, guid: b3e86ffb520ff8c469f3a6855f031964, type: 2}
   CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
   HandUILayoutGroup: {fileID: 1665703793}
   PlayerPrefab: {fileID: 3799004142929013861, guid: b329eb2187f9ff34e9ca2e189e6b8906,
@@ -1272,6 +1255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1189942789}
+  - component: {fileID: 1189942790}
   m_Layer: 0
   m_Name: Floors
   m_TagString: Untagged
@@ -1295,6 +1279,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1189942790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189942788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74d8e394de11824aa178e76f880f260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FloorList: {fileID: 11400000, guid: b3e86ffb520ff8c469f3a6855f031964, type: 2}
+  GameLifeCycleManager: {fileID: 823539689}
+  HandLayoutGroup: {fileID: 1665703793}
 --- !u!1 &1246150184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,18 +1557,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271543312}
   m_CullTransparentMesh: 0
---- !u!114 &1288576488 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1724689928931511374, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67,
-    type: 3}
-  m_PrefabInstance: {fileID: 928236246}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f713916d20feab046a1350b713f452d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1382316814
 GameObject:
   m_ObjectHideFlags: 0

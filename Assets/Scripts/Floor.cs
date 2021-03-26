@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityAtoms.BaseAtoms;
 
 public class Floor : MonoBehaviour
 {
-    public int FloorNumber;
-    public List<CardBuildZone> BuildZones;
+    public int FloorNumber { get; private set; }
+    public IEnumerable<CardBuildZone> BuildZones => GetComponentsInChildren<CardBuildZone>();
+
     public Transform SpawnPoint, CameraCenterPoint;
 
     public IntVariable CurrentPlayerFloor;
-    public GameLifeCycleManager GameLifeCycleManager;
+
+    GameLifeCycleManager gameLifeCycleManager;
 
     void OnTriggerEnter2D (Collider2D collision)
     {
@@ -18,6 +21,17 @@ public class Floor : MonoBehaviour
 
         if (player == null || FloorNumber == CurrentPlayerFloor.Value) return;
 
-        GameLifeCycleManager.PlayerReachedNewFloor(FloorNumber);
+        gameLifeCycleManager.PlayerReachedNewFloor(FloorNumber);
+    }
+
+    public void Initialize (int floorNumber, GameLifeCycleManager gameLifeCycleManager, LayoutGroup handLayoutGroup)
+    {
+        FloorNumber = floorNumber;
+        this.gameLifeCycleManager = gameLifeCycleManager;
+
+        foreach (var buildZone in BuildZones)
+        {
+            buildZone.Initialize(floorNumber, handLayoutGroup);
+        }
     }
 }

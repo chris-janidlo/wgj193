@@ -18,7 +18,7 @@ public class GameLifeCycleManager : MonoBehaviour
     public PhaseVariable CurrentPhase;
     public float TimeToStayInEnemyPhase;
 
-    public List<Floor> Floors;
+    public FloorList FloorList;
     public IntVariable CurrentPlayerFloor;
 
     public LayoutGroup HandUILayoutGroup;
@@ -46,7 +46,7 @@ public class GameLifeCycleManager : MonoBehaviour
         {
             // player fell down a floor
 
-            var cardsToRetrieve = Floors[CurrentPlayerFloor.Value].BuildZones
+            var cardsToRetrieve = FloorList.CurrentPlayerFloorObject.BuildZones
                 .Where(bz => bz.HasCard)
                 .Select(bz => bz.CurrentCard);
 
@@ -89,7 +89,7 @@ public class GameLifeCycleManager : MonoBehaviour
         yield return new WaitForSeconds(TimeToStayInEnemyPhase);
 
         CurrentPhase.Value = Phase.Platforming;
-        currentlyInstantiatedPlayer = Instantiate(PlayerPrefab, Floors[CurrentPlayerFloor.Value].SpawnPoint);
+        currentlyInstantiatedPlayer = Instantiate(PlayerPrefab, FloorList.CurrentPlayerFloorObject.SpawnPoint);
     }
 
     void drawHand ()
