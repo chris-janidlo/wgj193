@@ -49,7 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnPoint: {fileID: 1724689929398831378}
   CameraCenterPoint: {fileID: 1724689929178583144}
-  CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
+  CurrentPlayerFloorNumber: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601,
+    type: 2}
 --- !u!61 &1724689928931511375
 BoxCollider2D:
   m_ObjectHideFlags: 0

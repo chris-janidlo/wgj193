@@ -659,7 +659,8 @@ MonoBehaviour:
   CurrentPhase: {fileID: 11400000, guid: b797f2ae171283349865da6f4b038411, type: 2}
   TimeToStayInEnemyPhase: 2
   FloorList: {fileID: 11400000, guid: b3e86ffb520ff8c469f3a6855f031964, type: 2}
-  CurrentPlayerFloor: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601, type: 2}
+  CurrentPlayerFloorNumber: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601,
+    type: 2}
   HandUILayoutGroup: {fileID: 1665703793}
   PlayerPrefab: {fileID: 3799004142929013861, guid: b329eb2187f9ff34e9ca2e189e6b8906,
     type: 3}

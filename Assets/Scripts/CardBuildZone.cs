@@ -12,7 +12,7 @@ public class CardBuildZone : MonoBehaviour
 
     public Card CurrentCard { get; private set; }
 
-    public IntVariable PlayerFloor;
+    public IntVariable CurrentPlayerFloorNumber;
 
     public TransitionableFloat PlatformingBitsSizeTransition;
 
@@ -41,13 +41,13 @@ public class CardBuildZone : MonoBehaviour
 
         if (newPhase != Phase.Build) return;
 
-        if (floorNumber > PlayerFloor.Value)
+        if (floorNumber > CurrentPlayerFloorNumber.Value)
         {
             // game manager should retrieve the card from this and put it in the discard pile
             StartCoroutine(discardAnimation());
             CurrentCard = null;
         }
-        else if (floorNumber == PlayerFloor.Value)
+        else if (floorNumber == CurrentPlayerFloorNumber.Value)
         {
             StartCoroutine(discardAnimation());
             Instantiate(UICardPrefab).Initialize(CurrentCard, handLayoutGroup.transform, this);

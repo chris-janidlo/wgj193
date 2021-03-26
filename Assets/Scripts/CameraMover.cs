@@ -37,7 +37,7 @@ public class CameraMover : MonoBehaviour
         if (!followingPlayer)
         {
             // normally I would avoid ever assigning to the same atom variable in more than one script, but...
-            CurrentPlayerPosition.Value = FloorList.CurrentPlayerFloorObject.SpawnPoint.position;
+            CurrentPlayerPosition.Value = FloorList.CurrentPlayerFloor.SpawnPoint.position;
         }
 
         ZoomTransition.StartTransitionTo(followingPlayer ? FollowSize : BuildPhaseSize);
@@ -45,9 +45,9 @@ public class CameraMover : MonoBehaviour
 
     Vector3 getTargetPosition ()
     {
-        var yPosition = (followingPlayer ? CurrentPlayerPosition.Value : FloorList.CurrentPlayerFloorObject.CameraCenterPoint.position).y;
+        var yPosition = (followingPlayer ? CurrentPlayerPosition.Value : FloorList.CurrentPlayerFloor.CameraCenterPoint.position).y;
 
-        var minYPosition = FloorList.CurrentPlayerFloorObject.GetComponent<Collider2D>().bounds.min.y + Camera.orthographicSize;
+        var minYPosition = FloorList.CurrentPlayerFloor.GetComponent<Collider2D>().bounds.min.y + Camera.orthographicSize;
         yPosition = Mathf.Max(yPosition, minYPosition);
 
         return new Vector3(0, yPosition, transform.position.z);

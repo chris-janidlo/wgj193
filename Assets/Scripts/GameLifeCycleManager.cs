@@ -19,7 +19,7 @@ public class GameLifeCycleManager : MonoBehaviour
     public float TimeToStayInEnemyPhase;
 
     public FloorList FloorList;
-    public IntVariable CurrentPlayerFloor;
+    public IntVariable CurrentPlayerFloorNumber;
 
     public LayoutGroup HandUILayoutGroup;
 
@@ -37,23 +37,23 @@ public class GameLifeCycleManager : MonoBehaviour
 
     public void PlayerReachedNewFloor (int newFloor)
     {
-        if (CurrentPlayerFloor.Value == newFloor)
+        if (CurrentPlayerFloorNumber.Value == newFloor)
         {
             throw new InvalidOperationException($"phase and deck manager received PlayerReachedNewFloor notification even though the CurrentPlayerFloor atom has the same value as the newFloor ({newFloor}). this should never happen");
         }
 
-        if (CurrentPlayerFloor.Value > newFloor)
+        if (CurrentPlayerFloorNumber.Value > newFloor)
         {
             // player fell down a floor
 
-            var cardsToRetrieve = FloorList.CurrentPlayerFloorObject.BuildZones
+            var cardsToRetrieve = FloorList.CurrentPlayerFloor.BuildZones
                 .Where(bz => bz.HasCard)
                 .Select(bz => bz.CurrentCard);
 
             DiscardPile.List.AddRange(cardsToRetrieve);
         }
 
-        CurrentPlayerFloor.Value = newFloor;
+        CurrentPlayerFloorNumber.Value = newFloor;
 
         currentlyInstantiatedPlayer.Die();
     }
@@ -89,7 +89,7 @@ public class GameLifeCycleManager : MonoBehaviour
         yield return new WaitForSeconds(TimeToStayInEnemyPhase);
 
         CurrentPhase.Value = Phase.Platforming;
-        currentlyInstantiatedPlayer = Instantiate(PlayerPrefab, FloorList.CurrentPlayerFloorObject.SpawnPoint);
+        currentlyInstantiatedPlayer = Instantiate(PlayerPrefab, FloorList.CurrentPlayerFloor.SpawnPoint);
     }
 
     void drawHand ()

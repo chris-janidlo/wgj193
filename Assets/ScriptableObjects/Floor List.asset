@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e07b34c87d512341ab2ad7886ed6f1f, type: 3}
   m_Name: Floor List
   m_EditorClassIdentifier: 
-  CurrentPlayerFloorNumberVariable: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601,
+  CurrentPlayerFloorNumber: {fileID: 11400000, guid: 54f46794fa55f5d48be40b990e2b2601,
     type: 2}

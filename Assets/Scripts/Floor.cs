@@ -11,7 +11,7 @@ public class Floor : MonoBehaviour
 
     public Transform SpawnPoint, CameraCenterPoint;
 
-    public IntVariable CurrentPlayerFloor;
+    public IntVariable CurrentPlayerFloorNumber;
 
     GameLifeCycleManager gameLifeCycleManager;
 
@@ -19,7 +19,7 @@ public class Floor : MonoBehaviour
     {
         var player = collision.GetComponent<PlayerLifeCycleManager>();
 
-        if (player == null || FloorNumber == CurrentPlayerFloor.Value) return;
+        if (player == null || FloorNumber == CurrentPlayerFloorNumber.Value) return;
 
         gameLifeCycleManager.PlayerReachedNewFloor(FloorNumber);
     }

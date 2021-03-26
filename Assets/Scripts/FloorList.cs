@@ -8,7 +8,7 @@ public class FloorList : ScriptableObject
 {
     public List<Floor> Floors { get; set; }
 
-    public Floor CurrentPlayerFloorObject => Floors[CurrentPlayerFloorNumberVariable.Value];
+    public Floor CurrentPlayerFloor => Floors[CurrentPlayerFloorNumber.Value];
 
-    public IntVariable CurrentPlayerFloorNumberVariable;
+    public IntVariable CurrentPlayerFloorNumber;
 }
