@@ -31,6 +31,9 @@ public class GameLifeCycleManager : MonoBehaviour
 
     void Start ()
     {
+        DrawPile.Clear();
+        DiscardPile.Clear();
+
         DiscardPile.List.AddRange(Deck);
         startBuildPhase();
     }
