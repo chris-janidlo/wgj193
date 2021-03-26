@@ -1051,6 +1051,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -8.289999
       objectReference: {fileID: 0}
+    - target: {fileID: 3967731076646042300, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67, type: 3}
 --- !u!4 &928236247 stripped
@@ -1703,6 +1708,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1665703792}
   - component: {fileID: 1665703793}
+  - component: {fileID: 1665703795}
+  - component: {fileID: 1665703794}
   m_Layer: 5
   m_Name: Hand
   m_TagString: Untagged
@@ -1754,6 +1761,54 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1665703794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665703791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ecbd5493f656e43a0bf490fe25d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1665703795}
+        m_MethodName: OnPhaseChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 6c405bef0c8ab6b448899ed322fa2196, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}
+--- !u!114 &1665703795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665703791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4d0d543e5933848aff1ad2116881ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FloorList: {fileID: 11400000, guid: b3e86ffb520ff8c469f3a6855f031964, type: 2}
 --- !u!1 &1675435647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6734,6 +6789,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -7.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3967731076646042300, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 9038205717168992118, guid: f5f6e4b3c8d1e3c4cb12c39c65c81f67,
         type: 3}

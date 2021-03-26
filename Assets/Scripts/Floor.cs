@@ -9,7 +9,7 @@ public class Floor : MonoBehaviour
     public int FloorNumber { get; private set; }
     public IEnumerable<CardBuildZone> BuildZones => GetComponentsInChildren<CardBuildZone>();
 
-    public Transform SpawnPoint, CameraCenterPoint;
+    public Transform SpawnPoint, CameraCenterPoint, HandSnapPoint;
     public IntVariable CurrentPlayerFloorNumber;
 
     GameLifeCycleManager gameLifeCycleManager;
