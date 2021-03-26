@@ -6,31 +6,34 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Player Ability Charges", fileName = "newPlayerAbilityCharges.asset")]
 public class PlayerAbilityCharges : ScriptableObject
 {
+    public delegate void NumberOfAbilityChargesDidChangeDelegate (Ability ability, int oldValue, int newValue);
+    public event NumberOfAbilityChargesDidChangeDelegate NumberOfAbilityChargesDidChange;
+
     [SerializeField]
     int _dash, _glide, _superJump, _extraJump;
 
     public int Dash
     {
         get => _dash;
-        set => _dash = Math.Max(value, 0);
+        set => changeAbilityCharges(ref _dash, value, Ability.Dash);
     }
 
     public int Glide
     {
         get => _glide;
-        set => _glide = Math.Max(value, 0);
+        set => changeAbilityCharges(ref _glide, value, Ability.Glide);
     }
 
     public int SuperJump
     {
         get => _superJump;
-        set => _superJump = Math.Max(value, 0);
+        set => changeAbilityCharges(ref _superJump, value, Ability.SuperJump);
     }
 
     public int ExtraJump
     {
         get => _extraJump;
-        set => _extraJump = Math.Max(value, 0);
+        set => changeAbilityCharges(ref _extraJump, value, Ability.ExtraJump);
     }
 
     public int this[Ability ability]
@@ -74,5 +77,16 @@ public class PlayerAbilityCharges : ScriptableObject
                     throw new ArgumentException($"unexpected Ability value {ability}");
             }
         }
+    }
+
+    void changeAbilityCharges (ref int charges, int newValue, Ability ability)
+    {
+        int zeroedValue = Math.Max(newValue, 0);
+        if (charges == zeroedValue) return;
+
+        int oldValue = charges;
+        charges = zeroedValue;
+
+        NumberOfAbilityChargesDidChange?.Invoke(ability, oldValue, charges);
     }
 }
