@@ -69,6 +69,8 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
         dragOffset = (Vector2) DummyLayoutElement.position - pointerWorldPosition(eventData);
         DummyLayoutElement.SetParent(dragParent, true);
+
+        transform.SetAsLastSibling();
     }
 
     public void OnDrag (PointerEventData eventData)
