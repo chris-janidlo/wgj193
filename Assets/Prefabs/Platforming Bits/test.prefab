@@ -655,11 +655,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4162038588928263596, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 5119078163540402154, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
         type: 3}
       propertyPath: Colliders.Array.size
@@ -699,11 +694,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: test
-      objectReference: {fileID: 0}
-    - target: {fileID: 5119184663184338865, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5930915857313413874, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
         type: 3}
