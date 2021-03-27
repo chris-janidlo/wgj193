@@ -169,6 +169,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         lockedBuildZone.SetCard(card);
 
         DummyLayoutElement.position = buildZone.transform.position;
+        transform.SetAsFirstSibling();
     }
 
     void sendBackToHand ()
