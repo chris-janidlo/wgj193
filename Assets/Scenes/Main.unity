@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75c6a27376596447b88534e12f48d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandSize: 2
+  HandSize: 5
   Deck: {fileID: 11400000, guid: 0a4615011eb4eaf469d319767e5ac212, type: 2}
   DrawPile: {fileID: 11400000, guid: 1c19d4618b0c3e74f9378e33e3700b39, type: 2}
   DiscardPile: {fileID: 11400000, guid: c2921e914bcb56b449b040e1f4684f84, type: 2}
@@ -2657,7 +2657,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -8}
-  m_SizeDelta: {x: 32, y: 12}
+  m_SizeDelta: {x: 45, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1665703793
 MonoBehaviour:
