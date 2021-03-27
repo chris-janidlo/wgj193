@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gravity: 64
+  MaxFallSpeed: 32
   GroundProfile:
     MaxSpeed: 12
     Acceleration: 50

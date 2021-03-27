@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Stats")]
     public float Gravity;
+    public float MaxFallSpeed;
     public BasicMovementProfile GroundProfile, AirProfile, GlideProfile;
 
     // burst: initial instantaneous speed value when jumping
@@ -171,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity += Vector2.down * Gravity * Time.deltaTime;
+        velocity.y = Mathf.Max(velocity.y, -MaxFallSpeed);
 
 
         if (!gliding && PlayerAbilityCharges.Glide > 0 && velocity.y < -MinFallSpeedToStartGliding && glideInput)
