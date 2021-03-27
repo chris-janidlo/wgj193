@@ -25,7 +25,7 @@ public class CardPlatformingBits : MonoBehaviour
 
     void Start ()
     {
-        setColliderState(false);
+        if (AlwaysDisableColliders) setColliderState(false);
     }
 
     public void OnCurrentPhaseChanged (Phase newPhase)
