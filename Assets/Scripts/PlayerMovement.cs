@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     
     public float MinFallSpeedToStartGliding, MaxFallSpeedWhenGliding;
 
-    public float DashSpeed;
+    public float DashSpeed, DashMovementBypassTime;
 
     public float SuperJumpBurst, SpeedToEndSuperJumpState;
 
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         
     bool grounded, gliding, jumping, superJumping;
 
-    float earlyJumpPressTimer, nonGroundedGracePeriodTimer;
+    float earlyJumpPressTimer, nonGroundedGracePeriodTimer, dashMovementBypassTimer;
 
     // keep this at class-level to avoid making a new array every frame
     RaycastHit2D[] groundedHitList;
@@ -74,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     {
         earlyJumpPressTimer = Mathf.Max(earlyJumpPressTimer - Time.deltaTime, 0);
         nonGroundedGracePeriodTimer = Mathf.Min(nonGroundedGracePeriodTimer + Time.deltaTime, NonGroundedJumpGracePeriod);
+        dashMovementBypassTimer = Mathf.Max(dashMovementBypassTimer - Time.deltaTime, 0);
 
         animate();
     }
@@ -171,6 +172,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (dashMovementBypassTimer > 0) return;
+
         velocity += Vector2.down * Gravity * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, -MaxFallSpeed);
 
@@ -228,6 +231,8 @@ public class PlayerMovement : MonoBehaviour
 
     void move ()
     {
+        if (dashMovementBypassTimer > 0) return;
+
         float x = velocity.x;
         float inputX = moveInput.x;
 
@@ -266,11 +271,12 @@ public class PlayerMovement : MonoBehaviour
 
     void dash ()
     {
-        if (dashInput && PlayerAbilityCharges.Dash > 0)
+        if (dashInput && PlayerAbilityCharges.Dash > 0 && dashMovementBypassTimer == 0)
         {
             jumping = false;
             dashInput = false;
             PlayerAbilityCharges.Dash--;
+            dashMovementBypassTimer = DashMovementBypassTime;
 
             Vector2 direction = moveInput;
 

@@ -71,6 +71,7 @@ MonoBehaviour:
   MinFallSpeedToStartGliding: 6
   MaxFallSpeedWhenGliding: 2
   DashSpeed: 16
+  DashMovementBypassTime: 0.15
   SuperJumpBurst: 32
   SpeedToEndSuperJumpState: 12
   HalfHeight: 1
