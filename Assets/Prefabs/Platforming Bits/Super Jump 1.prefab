@@ -1702,12 +1702,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5119078163540402154, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
         type: 3}
-      propertyPath: _designNotes
-      value: Can be cleared pretty easily with a double jump, and can be cleared
-        with some effort with a well-timed up dash at the top a jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 5119078163540402154, guid: 3339eb4d2313a2a4fb2ff8ad976f8314,
-        type: 3}
       propertyPath: Colliders.Array.data[0]
       value: 
       objectReference: {fileID: 6952251680817938825}
