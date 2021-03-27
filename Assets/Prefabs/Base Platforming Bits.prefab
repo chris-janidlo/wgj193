@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alwaysDisableColliders: 0
-  Colliders: []
+  _designNotes: 
 --- !u!114 &2828711407236965216
 MonoBehaviour:
   m_ObjectHideFlags: 0

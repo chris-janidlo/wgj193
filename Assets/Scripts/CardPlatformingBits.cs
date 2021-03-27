@@ -16,8 +16,6 @@ public class CardPlatformingBits : MonoBehaviour
         }
     }
 
-    public List<Collider2D> Colliders;
-
     [Tooltip("This isn't used anywhere in the code - just notes for me")]
     [TextArea(5, 500)]
     [SerializeField]
@@ -35,6 +33,9 @@ public class CardPlatformingBits : MonoBehaviour
 
     void setColliderState (bool value)
     {
-        Colliders.ForEach(c => c.enabled = value);
+        foreach (var c in GetComponentsInChildren<Collider2D>())
+        {
+            c.enabled = value;
+        }
     }
 }
