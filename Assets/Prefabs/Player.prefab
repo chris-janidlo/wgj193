@@ -51,14 +51,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gravity: 64
-  MaxFallSpeed: 32
+  MaxFallSpeed: 28
   GroundProfile:
-    MaxSpeed: 12
-    Acceleration: 50
-    Deceleration: 80
+    MaxSpeed: 8
+    Acceleration: 32
+    Deceleration: 100
   AirProfile:
     MaxSpeed: 12
-    Acceleration: 40
+    Acceleration: 24
     Deceleration: 4
   GlideProfile:
     MaxSpeed: 8
