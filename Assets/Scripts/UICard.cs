@@ -104,8 +104,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         this.handParent = handParent;
         lockedBuildZone = initialBuildZone;
 
-        var platformingBits = Instantiate(card.PlatformingBits, PlatformingBitsParent);
-        platformingBits.AlwaysDisableColliders = true;
+        instantiatePlatformingBits();
         AbilityText.text = card.Ability.ToString();
 
         dragParent = handParent.parent;
@@ -138,6 +137,20 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         else
         {
             StartCoroutine(sendCardToPlatformingUI());
+        }
+    }
+
+    void instantiatePlatformingBits ()
+    {
+        var platformingBits = Instantiate(card.PlatformingBits, PlatformingBitsParent);
+        platformingBits.AlwaysDisableColliders = true;
+
+        // super duper ugly hack: in order to prevent SpriteRenderers from drawing over cards they shouldn't, just replace them with UI Image components. you know what they say, if it's stupid but it works...
+        foreach (var spriteRenderer in platformingBits.GetComponentsInChildren<SpriteRenderer>())
+        {
+            var sprite = spriteRenderer.sprite;
+            spriteRenderer.gameObject.AddComponent<Image>().sprite = sprite;
+            Destroy(spriteRenderer);
         }
     }
 
