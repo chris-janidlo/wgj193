@@ -18,6 +18,11 @@ public class CardPlatformingBits : MonoBehaviour
 
     public List<Collider2D> Colliders;
 
+    [Tooltip("This isn't used anywhere in the code - just notes for me")]
+    [TextArea(5, 500)]
+    [SerializeField]
+    string _designNotes;
+
     void Start ()
     {
         setColliderState(false);
