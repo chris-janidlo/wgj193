@@ -21,7 +21,7 @@ public class Nomp : MonoBehaviour
 
     RaycastHit2D[] moveCheckResults;
 
-    void Start ()
+    void Awake ()
     {
         moveCheckResults = new RaycastHit2D[1];
 

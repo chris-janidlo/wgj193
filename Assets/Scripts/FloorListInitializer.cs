@@ -9,7 +9,7 @@ public class FloorListInitializer : MonoBehaviour
     public GameLifeCycleManager GameLifeCycleManager;
     public LayoutGroup HandLayoutGroup;
 
-    public void Start ()
+    void Awake ()
     {
         FloorList.Floors = new List<Floor>();
 
