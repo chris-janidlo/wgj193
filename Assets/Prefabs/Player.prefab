@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519d3f289250434386594968c6f502c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gravity: 64
-  MaxFallSpeed: 28
+  Gravity: 56
+  MaxFallSpeed: 20
   GroundProfile:
     MaxSpeed: 8
     Acceleration: 32
@@ -64,14 +64,14 @@ MonoBehaviour:
     MaxSpeed: 8
     Acceleration: 32
     Deceleration: 32
-  JumpSpeedBurst: 24
+  JumpSpeedBurst: 22
   JumpSpeedCut: 10
   EarlyJumpPressTime: 0.3
   NonGroundedJumpGracePeriod: 0.1
   MinFallSpeedToStartGliding: 6
   MaxFallSpeedWhenGliding: 2
   DashSpeed: 16
-  SuperJumpBurst: 36
+  SuperJumpBurst: 32
   SpeedToEndSuperJumpState: 12
   HalfHeight: 1
   GroundCheckBoxDimensions: {x: 1, y: 0.2}
