@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7999613640e30bb4eb248df7e006353d, type: 3}
   m_Name: Player Ability Charges
   m_EditorClassIdentifier: 
+  InfiniteAbilityUse: 0
   _dash: 0
   _glide: 0
   _superJump: 0

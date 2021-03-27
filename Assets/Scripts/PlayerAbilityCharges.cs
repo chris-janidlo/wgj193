@@ -9,31 +9,33 @@ public class PlayerAbilityCharges : ScriptableObject
     public delegate void NumberOfAbilityChargesDidChangeDelegate (Ability ability, int oldValue, int newValue);
     public event NumberOfAbilityChargesDidChangeDelegate NumberOfAbilityChargesDidChange;
 
+    public bool InfiniteAbilityUse;
+
     [SerializeField]
     int _dash, _glide, _superJump, _extraJump;
 
     public int Dash
     {
-        get => _dash;
-        set => changeAbilityCharges(ref _dash, value, Ability.Dash);
+        get => getAbilityCharges(_dash);
+        set => setAbilityCharges(ref _dash, value, Ability.Dash);
     }
 
     public int Glide
     {
-        get => _glide;
-        set => changeAbilityCharges(ref _glide, value, Ability.Glide);
+        get => getAbilityCharges(_glide);
+        set => setAbilityCharges(ref _glide, value, Ability.Glide);
     }
 
     public int SuperJump
     {
-        get => _superJump;
-        set => changeAbilityCharges(ref _superJump, value, Ability.SuperJump);
+        get => getAbilityCharges(_superJump);
+        set => setAbilityCharges(ref _superJump, value, Ability.SuperJump);
     }
 
     public int ExtraJump
     {
-        get => _extraJump;
-        set => changeAbilityCharges(ref _extraJump, value, Ability.ExtraJump);
+        get => getAbilityCharges(_extraJump);
+        set => setAbilityCharges(ref _extraJump, value, Ability.ExtraJump);
     }
 
     public int this[Ability ability]
@@ -81,6 +83,8 @@ public class PlayerAbilityCharges : ScriptableObject
 
     public void Initialize ()
     {
+        InfiniteAbilityUse = false;
+
         _dash = 0;
         _glide = 0;
         _extraJump = 0;
@@ -95,8 +99,15 @@ public class PlayerAbilityCharges : ScriptableObject
         SuperJump = 0;
     }
 
-    void changeAbilityCharges (ref int charges, int newValue, Ability ability)
+    int getAbilityCharges (int charges)
     {
+        return InfiniteAbilityUse ? 1 : charges;
+    }
+
+    void setAbilityCharges (ref int charges, int newValue, Ability ability)
+    {
+        if (InfiniteAbilityUse) return;
+
         int zeroedValue = Math.Max(newValue, 0);
         if (charges == zeroedValue) return;
 
